@@ -9,6 +9,7 @@
 	</head>
 
 	<body>
+		<!-- * 필터 -->
 		<div class="list-inline-filter-wrap">
 			<div class="list-inline-filter">
 				<div class="inline-list">
@@ -58,7 +59,62 @@
 				</div>
 			</div>
 		</div>
+		<!-- * 비자 -->
+		<dl class="list-inline-visa">
+			<dt><strong>비자 안내</strong><button type="button" class="ti ti-exclamation-circle" aria-label="비자정보 상세보기"></button></dt>
+			<dd><strong>'태국' 방문시 무비자</strong><span>(최대 90일)</span></dd>
+		</dl>
+		<!-- * 항공 검색결과 아이템 -->
+		<div class="flight-list-item">
+			<div class="flight-name"><strong>제주항공</strong><span class="code-share">델타항공 공동운항</span></div>
+			<div class="flight-info">
+				<ul class="list-schedule">
+					<li><strong>09:00</strong><span>ICN</span></li>
+					<li><strong>18:00</strong><span>BKK</span></li>
+				</ul>
+				<div class="seat-class">
+					<button type="button" class="seat-class-default" aria-haspopup="true" aria-expanded="false"><span>L클래스</span></button>
+				</div>
+				<div class="flight-info-detail"><button type="button" class="btn-schedule-detail" aria-haspopup="true" aria-expanded="false"><strong>경유 1</strong>, 9시간 00분 소요</button></div>
+			</div>
+			<ul class="flight-benefit">
+				<li class="benefit-label">무료수화물</li>
+				<li class="benefit-label">환불가능</li>
+			</ul>
+			<div class="price">
+				<span class="available-seat">잔여 1석</span><strong>649,000원</strong>
+			</div>
+			<button type="button" class="item-selected-schedule" aria-label="선택"></button>
+		</div>
+		<!-- * 항공 검색결과 아이템 -->
+		<div class="flight-list-item">
+			<div class="flight-name"><strong>대한항공</strong></div>
+			<div class="flight-info">
+				<ul class="list-schedule">
+					<li><strong>09:10</strong><span>ICN</span></li>
+					<li><strong>13:10</strong><span>BKK</span></li>
+				</ul>
+				<div class="seat-class">
+					<button type="button" class="seat-class-default" aria-haspopup="true" aria-expanded="false"><span>L클래스</span></button>
+				</div>
+				<div class="flight-info-detail"><button type="button" class="btn-schedule-detail" aria-haspopup="true" aria-expanded="false"><strong>직항</strong>, 5시간 00분 소요</button></div>
+			</div>
+			<ul class="flight-benefit">
+				<li class="benefit-label">무료수화물</li>
+				<li class="benefit-label">환불가능</li>
+			</ul>
+			<div class="price">
+				<span class="available-seat">잔여 3석</span><strong>649,000원</strong>
+			</div>
+			<button type="button" class="item-selected-schedule" aria-label="선택"></button>
+		</div>
 		<script>
+			document.querySelectorAll('.btn-schedule-detail').forEach(button => {
+				button.addEventListener('click', () => {
+					const isChecked = button.getAttribute('aria-expanded') === 'true';
+					button.setAttribute('aria-expanded', !isChecked);
+				});
+			});
 			document.querySelectorAll('.btn-inline-filter').forEach(button => {
 				button.addEventListener('click', () => {
 					const isChecked = button.getAttribute('aria-checked') === 'true';

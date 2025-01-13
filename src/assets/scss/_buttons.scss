@@ -5,6 +5,7 @@
 	border-block-start: 1px solid var(--border-default);
 	background: {
 		color: var(--default-bg);
+		attachment: fixed;
 	}
 }
 .list-inline-filter,
@@ -12,14 +13,10 @@
 	@include position(relative);
 	.inline-list {
 		@include flex(flex, null, nowrap, center);
-		column-gap: 4px;
+		@include mobile-scrollbars;
 		overflow: auto hidden;
 		padding: 12px 20px;
-		@media (hover: none) and (pointer: coarse) {
-			&::-webkit-scrollbar {
-				display: none;
-			}
-		}
+		column-gap: 4px;
 	}
 	&:before,
 	&:after {
@@ -47,9 +44,9 @@
 	}
 }
 .list-selected-filter {
+	display: none;
 	border-block-start: 1px solid rgba(var(--c-gray-7-rgb), 80%);
 	border-block-end: 1px solid var(--border-default);
-	display: none;
 }
 // * 리스트 필터 - 초기화
 .btn-inline-reset {
@@ -61,13 +58,13 @@
 		color: var(--c-white);
 	}
 	&:before {
+		content: "\eb15";
 		color: var(--tertiary-blue);
 		font: {
-			family: "tabler-icons";
 			size: var(--fs-extra);
+			family: "tabler-icons";
 			weight: var(--fw-medium);
 		}
-		content: "\eb15";
 	}
 }
 // * 리스트 필터 - 필터 선택
@@ -145,6 +142,53 @@
 				family: "tabler-icons";
 				weight: var(--fw-semi);
 			}
+		}
+	}
+}
+
+// * 비자
+.list-inline-visa {
+	border-block-end: 1px solid var(--border-default);
+	background: {
+		color: var(--c-white);
+	}
+	padding: 16px 20px;
+	dt {
+		@include flex(flex, null, null, center);
+		strong {
+			color: var(--primary-blue);
+			font: {
+				weight: var(--fw-semi);
+			}
+		}
+		&:before {
+			color: var(--primary-blue);
+			flex: none;
+			margin-right: 6px;
+			font: {
+				family: "tabler-icons";
+			}
+			content: "\f9e4";
+		}
+		.ti-exclamation-circle {
+			font: {
+				size: var(--fs-medium);
+			}
+			margin-left: 4px;
+			color: var(--c-gray-3);
+		}
+	}
+	dd {
+		margin-top: 4px;
+		font: {
+			size: var(--fs-medium);
+		}
+		strong {
+			flex: none;
+		}
+		span {
+			flex: none;
+			color: var(--c-gray-3);
 		}
 	}
 }

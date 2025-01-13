@@ -567,6 +567,20 @@ $imp: unquote("!important");
 	}
 }
 
+@mixin mobile-scrollbars {
+	@media (hover: none) and (pointer: coarse) {
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+	@media (hover: hover) and (pointer: fine) {
+		@include scrollbar(4px, transparent, 2px);
+		&:hover {
+			@include scrollbar(4px, var(--c-gray-5), 2px);
+		}
+	}
+}
+
 // * important
 $imp: unquote("!important");
 

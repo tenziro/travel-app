@@ -1,0 +1,173 @@
+@charset "UTF-8";
+
+.flight-list-item {
+	@include position(relative);
+	padding: 16px 20px;
+	border-block-end: 1px solid var(--border-default);
+	.flight {
+		&-name {
+			@include flex(flex, null, null, center);
+			margin-bottom: 8px;
+			strong {
+				flex: none;
+				color: var(--c-black);
+				font: {
+					size: var(--fs-large);
+					weight: var(--fw-semi);
+				}
+			}
+			.code-share {
+				@include flex(inline-flex, null, null, center);
+				--height: 20px;
+				flex: none;
+				height: var(--height);
+				padding: 0 8px;
+				color: var(--c-gray-4);
+				margin-left: 4px;
+				border-radius: calc(var(--height) / 2);
+				background: {
+					color: rgba(var(--c-gray-3-rgb), 15%);
+				}
+				font: {
+					size: var(--fs-xxsmall);
+					weight: var(--fw-semi);
+				}
+			}
+		}
+		&-info {
+			@include flex(flex, null, wrap, center);
+		}
+		&-benefit {
+			@include flex(flex, null, wrap, center);
+			margin-top: 8px;
+			column-gap: 4px;
+			.benefit-label {
+				padding: 4px 6px;
+				color: var(--c-gray-2);
+				border-radius: 3px;
+				background: {
+					color: var(--default-bg);
+				}
+				font: {
+					size: var(--fs-xxsmall);
+					weight: var(--fw-semi);
+				}
+			}
+		}
+		&-info-detail {
+			flex: 0 0 100%;
+			margin-top: 4px;
+			.btn-schedule-detail {
+				@include flex(flex, null, null, center);
+				font: {
+					size: var(--fs-small);
+				}
+				&:after {
+					flex: none;
+					color: var(--c-gray-4);
+					margin-left: 2px;
+					font: {
+						size: var(--fs-base);
+						family: "tabler-icons";
+					}
+				}
+				&[aria-expanded="false"] {
+					&:after {
+						content: "\ea5f";
+					}
+				}
+				&[aria-expanded="true"] {
+					&:after {
+						content: "\ea62";
+					}
+				}
+			}
+		}
+	}
+	.seat-class {
+		flex: none;
+		margin-left: auto;
+		.seat-class-default {
+			@include flex(inline-flex, null, null, center);
+			span {
+				flex: none;
+				color: var(--c-gray-4);
+				font: {
+					size: var(--fs-xsmall);
+					weight: var(--fw-semi);
+				}
+			}
+			&:after {
+				content: "\ff62";
+				flex: none;
+				color: var(--c-gray-4);
+				margin-left: 2px;
+				font: {
+					size: var(--fs-medium);
+					family: "tabler-icons";
+				}
+			}
+		}
+	}
+	.list-schedule {
+		@include flex(flex, null, null, center);
+		li {
+			@include flex(inline-flex, null, null, center);
+			flex: none;
+			strong, span {
+				flex: none;
+			}
+			strong {
+				font: {
+					size: var(--fs-extra);
+					weight: var(--fw-bold);
+				}
+			}
+			span {
+				color: var(--primary-blue);
+				margin-left: 4px;
+				font: {
+					size: var(--fs-xsmall);
+					weight: var(--fw-semi);
+				}
+			}
+			&:last-child {
+				&:before {
+					content: "\ef98";
+					flex: none;
+					margin: 0 6px;
+					color: var(--c-gray-5);
+					font: {
+						size: var(--fs-large);
+						family: "tabler-icons";
+					}
+				}
+			}
+		}
+	}
+	.seat-class-default,
+	.btn-schedule-detail {
+		@include position(relative, null, null, null, null, 1);
+	}
+	.price {
+		@include flex(flex, null, null, center, null, null, flex-end);
+		strong {
+			color: var(--primary-blue);
+			font: {
+				size: var(--fs-extra);
+				weight: var(--fw-bold);
+			}
+		}
+		.available-seat {
+			color: var(--c-point-1);
+			margin-right: 4px;
+			font: {
+				size: var(--fs-xxsmall);
+				weight: var(--fw-semi);
+			}
+		}
+	}
+	.item-selected-schedule {
+		@include position(absolute, 0, 0, 0, 0, 0);
+	}
+}
