@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+// ! Pretendard 폰트 설정
+$pretendard-weights: (900: 'Black',
+		800: 'ExtraBold',
+		700: 'Bold',
+		600: 'SemiBold',
+		500: 'Medium',
+		400: 'Regular',
+		300: 'Light',
+		200: 'ExtraLight',
+		100: 'Thin'
+	);
+
+@each $weight, $name in $pretendard-weights {
+	@font-face {
+		font-family: 'Pretendard';
+		font-weight: $weight;
+		font-display: swap;
+		src: local('Pretendard #{$name}'),
+		url('../fonts/Pretendard-#{$name}.woff2') format('woff2'),
+		url('../fonts/Pretendard-#{$name}.woff') format('woff');
+	}
+	@font-face {
+		font-family: 'Pretendard';
+		font-weight: $weight;
+		font-display: swap;
+		src: local('Pretendard #{$name}'),
+		url('../fonts/Pretendard-#{$name}.subset.woff2') format('woff2'),
+		url('../fonts/Pretendard-#{$name}.subset.woff') format('woff');
+	}
+}

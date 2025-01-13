@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+// * 리스트 필터
+.list-inline-filter-wrap {
+	border-block-start: 1px solid var(--border-default);
+	background: {
+		color: var(--default-bg);
+	}
+}
+.list-inline-filter,
+.list-selected-filter {
+	@include position(relative);
+	.inline-list {
+		@include flex(flex, null, nowrap, center);
+		column-gap: 4px;
+		overflow: auto hidden;
+		padding: 12px 20px;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+	&:before,
+	&:after {
+		content: "";
+		position: absolute;
+		width: 29px;
+	}
+	&:before {
+		inset: 0 auto 0 0;
+		background: linear-gradient(-90deg, hsla(0, 0%, 98%, 0), var(--default-bg) 24px, var(--default-bg));
+	}
+	&:after {
+		inset: 0 0 0 auto;
+		background: linear-gradient(90deg, hsla(0, 0%, 98%, 0), var(--default-bg) 24px, var(--default-bg));
+	}
+}
+.list-inline-filter {
+	--btn-height: 34px;
+	--btn-weight: 34px;
+	// @include scrollbar(4px, var(--primary-blue), 2px);
+	.inline-list {
+		button {
+			flex: none;
+		}
+	}
+}
+.list-selected-filter {
+	border-block-start: 1px solid rgba(var(--c-gray-7-rgb), 80%);
+	border-block-end: 1px solid var(--border-default);
+}
+// * 리스트 필터 - 초기화
+.btn-inline-reset {
+	@include border(all, 1px, solid, var(--tertiary-blue), calc(var(--btn-height) / 2));
+	@include flex(inline-flex, null, null, center, null, null, center);
+	width: var(--btn-weight);
+	height: var(--btn-height);
+	background: {
+		color: var(--c-white);
+	}
+	&:before {
+		color: var(--tertiary-blue);
+		font: {
+			family: "tabler-icons";
+			size: var(--fs-extra);
+			weight: var(--fw-medium);
+		}
+		content: "\eb15";
+	}
+}
+// * 리스트 필터 - 필터 선택
+.btn-inline-filter {
+	@include border(all, 1px, solid, null, calc(var(--btn-height) / 2));
+	@include flex(inline-flex, null, null, center);
+	height: var(--btn-height);
+	padding: 14px;
+	> span {
+		flex: none;
+		font: {
+			size: var(--fs-base);
+			weight: var(--fw-semi);
+		}
+	}
+	&[aria-checked="true"] {
+		border: {
+			color: transparent;
+		}
+		background: {
+			color: var(--tertiary-blue);
+		}
+		span {
+			color: var(--c-white);
+		}
+	}
+	&[aria-checked="false"] {
+		border: {
+			color: var(--border-default);
+		}
+		background: {
+			color: var(--c-white);
+		}
+		span {
+			color: var(--c-gray-2);
+		}
+	}
+}
+.list-selected-filter {
+	--btn-height: 28px;
+	--btn-weight: 28px;
+	--btn-radius: 4px;
+	.selected-filter {
+		@include position(relative);
+		@include border(all, 1px, solid, var(--border-default), var(--btn-radius));
+		@include box-shadow(0, 0, 1px, rgba(var(--c-black-rgb), 10%));
+		@include flex(inline-flex, null, null, center);
+		flex: none;
+		height: var(--btn-height);
+		background: {
+			color: var(--c-white);
+		}
+	}
+	.selected-filter-text {
+		padding: 0 2px 0 8px;
+		color: var(--secondary-blue);
+		font: {
+			size: var(--fs-small);
+			weight: var(--fw-bold);
+		}
+	}
+	.btn-infilter-view {
+		@include position(absolute, 0, 0, 0, 0, 0);
+	}
+	.btn-infilter-delete {
+		@include flex(inline-flex, null, null, center);
+		@include position(relative, null, null, null, null, 1);
+		flex: none;
+		height: var(--btn-height);
+		padding-right: 8px;
+		&:before {
+			content: "\eb55";
+			color: var(--c-gray-5);
+			font: {
+				family: "tabler-icons";
+				weight: var(--fw-semi);
+			}
+		}
+	}
+}

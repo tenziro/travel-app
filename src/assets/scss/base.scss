@@ -1,0 +1,575 @@
+@charset "UTF-8";
+
+// ! root setting
+:root {
+	--root-bg: #FFF;
+	--default-bg: #F2F3F7;
+	--default-bg-rgb: 242, 243, 247;
+	--placeholder: rgba(126, 130, 137, 40%);
+	--border-default: #E5E9ED;
+	--border-focus: #1B32D8;
+	--border-valid: #FF5C4B;
+	--disabled-btn: rgba(126, 130, 137, 30%);
+	--disabled: rgba(230, 233, 238, 40%);
+	--c-white: #FFF;
+	--c-white-rgb: 255, 255, 255;
+	--c-black: #000;
+	--c-black-rgb: 0, 0, 0;
+	--c-gray-1: #333;
+	--c-gray-1-rgb: 51, 51, 51;
+	--c-gray-2: #787878;
+	--c-gray-3: #7e8289;
+	--c-gray-3-rgb: 128, 131, 137;
+	--c-gray-4: #848484;
+	--c-gray-5: #B9BEC6;
+	--c-gray-6: #BEBEBE;
+	--c-gray-7: #E5E9ED;
+	--c-gray-7-rgb: 229, 233, 237;
+	--c-gray-8: #F2F3F7;
+	--c-gray-8-rgb: 242, 243, 247;
+	--primary-blue: #1B32D8;
+	--primary-blue-rgb: 27, 50, 216;
+	--secondary-blue: #74AFFB;
+	--secondary-blue-rgb: 116, 175, 251;
+	--tertiary-blue: #308AFC;
+	--tertiary-blue-rgb: 0, 152, 255;
+	--c-point-1: #FF5C4B;
+	--c-point-1-rgb: 255, 92, 75;
+	--c-point-2: #91ACCE;
+	--c-point-2-rgb: 145, 172, 206;
+
+	// * font size
+	--fs-mini: 10px;
+	--fs-xxsmall: 11px;
+	--fs-xsmall: 12px;
+	--fs-small: 13px;
+	--fs-base: 14px;
+	--fs-medium: 15px;
+	--fs-large: 16px;
+	--fs-extra: 17px;
+	--fs-big: 18px;
+	--fs-black: 20px;
+	--fs-super: 24px;
+
+	// * font weight
+	--fw-thin: 100;
+	--fw-extlight: 200;
+	--fw-light: 300;
+	--fw-base: 400;
+	--fw-medium: 500;
+	--fw-semi: 600;
+	--fw-bold: 700;
+	--fw-extra: 800;
+	--fw-black: 900;
+
+	// * border radius
+	--rd-half: 50%;
+	--rd-full: 100%;
+	--rd-xsmall: 2px;
+	--rd-small: 4px;
+	--rd-medium: 8px;
+	--rd-large: 16px;
+
+	// * min, max size
+	--body-min-width: 320px;
+	--body-max-width: 640px;
+
+	// * line height
+	--lh-120: 120%;
+	--lh-130: 130%;
+	--lh-140: 140%;
+	--lh-150: 150%;
+	--lh-160: 160%;
+}
+
+// * local image url setting
+$base-image-url: "../images/img/";
+$common-image-url: "../images/common/";
+$icons-image-url: "../images/icons/";
+
+// * server image url setting
+// $base-image-url: "/assets/images/img/";
+// $common-image-url: "/assets/images/common/";
+// $icons-image-url: "/assets/images/icons/";
+
+// * important
+$imp: unquote("!important");
+
+// ! Mixin Tool
+// ! 글로벌로 사용되는 @mixin을 포함한다.
+// * 한줄 말줄임 @mixin
+// * 종방향 스크롤 @mixin
+@mixin overflow-y {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+// * 횡방향 스크롤 @mixin
+@mixin overflow-x {
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+// * 부모의 위치 대비 좌우 가운데 정렬 @mixin
+@mixin centerer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+// * 백그라운드 커버 형태 @mixin
+@mixin bg-cover {
+	background: {
+		position: 50% 50% $imp;
+		size: cover $imp;
+		repeat: no-repeat $imp;
+	}
+}
+// * flex 레이아웃
+@mixin flex($flex: flex,
+	$f-direction: null,
+	$f-wrap: null,
+	$a-items: null,
+	$a-content: null,
+	$a-self: null,
+	$j-content: null,
+	$j-self: null) {
+	display: $flex;
+	flex-direction: $f-direction;
+	flex-wrap: $f-wrap;
+	align-items: $a-items;
+	align-content: $a-content;
+	align-self: $a-self;
+	justify-content: $j-content;
+	justify-self: $j-self;
+}
+// * flex 관련 @mixin
+@mixin flex-align-center {
+	display: flex;
+	align-items: center;
+}
+@mixin flex-align-start {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+@mixin flex-all-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+@mixin inline-flex-align-start {
+	display: inline-flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+@mixin inline-flex-align-center {
+	display: inline-flex;
+	align-items: center;
+}
+@mixin inline-flex-all-center {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+@mixin inline-flex-justify-center {
+	display: inline-flex;
+	justify-content: center;
+}
+@mixin flex-justify-center {
+	display: flex;
+	justify-content: center;
+}
+@mixin flex-justify-between {
+	display: flex;
+	justify-content: space-between;
+}
+@mixin flex-justify-around {
+	display: flex;
+	justify-content: space-around;
+}
+@mixin flex-between-center {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+@mixin flex-between-start {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+@mixin flex-between-end {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+@mixin flex-around-center {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+@mixin flex-column {
+	display: flex;
+	flex-direction: column;
+}
+@mixin inline-flex-column {
+	display: inline-flex;
+	flex-direction: column;
+}
+// * 이미지 없을 경우 임시 이미지 설정
+@mixin no-image($large: true) {
+	@if ($large) {
+		background: {
+			size: auto 50px $imp;
+		}
+	}
+	@else {
+		background: {
+			size: auto 30px $imp;
+		}
+	}
+	background: {
+		position: 50% 50% $imp;
+		repeat: no-repeat $imp;
+		image: url($common-image-url + 'ico-nodata-image.png') $imp;
+	}
+}
+// * 다중 백그라운드 설정
+@mixin bg-multiple($large: true, $size: cover, $color: null) {
+	@if ($large) {
+		background: {
+			size: $size, 40px auto $imp;
+		}
+	}
+	@else {
+		background: {
+			size: $size, 30px auto $imp;
+		}
+	}
+	background: {
+		position: 50% 50% $imp;
+		color: $color;
+		repeat: no-repeat $imp;
+	}
+}
+// * 밑줄
+@mixin underline-offset($offset, $color: null) {
+	text-decoration: underline;
+	text-underline-offset: $offset + px;
+	text-decoration-color: $color $imp;
+}
+// * 해상도 이미지 출력
+@mixin bg-image-set($url: null, $image-name: null, $position: null, $repeat: null, $color: null, $size: null) {
+	@if ($url ==common) {
+		background: {
+			image: url($common-image-url + $image-name + '.png');
+			image: image-set(url($common-image-url + $image-name + '.png') 1x,
+					url($common-image-url + $image-name + '@2x.png') 2x);
+		}
+	}
+	@else if ($url ==icons) {
+		background: {
+			image: url($icons-image-url + $image-name + '.png');
+			image: image-set(url($icons-image-url + $image-name + '.png') 1x,
+					url($icons-image-url + $image-name + '@2x.png') 2x);
+		}
+	}
+	@else if ($url ==base) {
+		background: {
+			image: url($base-image-url + $image-name + '.png');
+			image: image-set(url($base-image-url + $image-name + '.png') 1x,
+					url($base-image-url + $image-name + '@2x.png') 2x);
+		}
+	}
+	@else if ($url ==documents) {
+		background: {
+			image: url($documents-image-url + $image-name + '.png');
+			image: image-set(url($documents-image-url + $image-name + '.png') 1x,
+					url($documents-image-url + $image-name + '@2x.png') 2x);
+		}
+	}
+	@else if ($url ==landing) {
+		background: {
+			image: url($landing-image-url + $image-name + '.png');
+			image: image-set(url($landing-image-url + $image-name + '.png') 1x,
+					url($landing-image-url + $image-name + '@2x.png') 2x);
+		}
+	}
+	@else if ($url ==logos) {
+		background: {
+			image: url($logos-image-url + $image-name + '.png');
+			image: image-set(url($logos-image-url + $image-name + '.png') 1x,
+					url($logos-image-url + $image-name + '@2x.png') 2x);
+		}
+	}
+	@else if ($url ==temp) {
+		background: {
+			image: url($temp-image-url + $image-name + '.png');
+			image: image-set(url($temp-image-url + $image-name + '.png') 1x,
+					url($temp-image-url + $image-name + '@2x.png') 2x);
+		}
+	}
+	background: {
+		position: $position;
+		color: $color;
+		size: $size;
+		repeat: $repeat;
+	}
+}
+@mixin bg-image-svg($url: null, $image-name: null, $position: null, $repeat: null, $color: null, $size: null) {
+	@if ($url ==common) {
+		background: {
+			image: url($common-image-url + $image-name + '.svg');
+		}
+	}
+	@else if ($url ==icons) {
+		background: {
+			image: url($icons-image-url + $image-name + '.svg');
+		}
+	}
+	@else if ($url ==landing) {
+		background: {
+			image: url($landing-image-url + $image-name + '.svg');
+		}
+	}
+	text-indent: -9999em;
+	background: {
+		position: $position;
+		color: $color;
+		size: $size;
+		repeat: $repeat;
+	}
+}
+// * border 설정
+@mixin border($pos: null, $width: null, $style: null, $color: null, $radius: null) {
+	@if ($pos ==top) {
+		border: {
+			top: $width $style $color;
+		}
+	}
+	@else if ($pos ==right) {
+		border: {
+			right: $width $style $color;
+		}
+	}
+	@else if ($pos ==bottom) {
+		border: {
+			bottom: $width $style $color;
+		}
+	}
+	@else if ($pos ==left) {
+		border: {
+			left: $width $style $color;
+		}
+	}
+	@else if ($pos ==all) {
+		border: {
+			width: $width;
+			color: $color;
+			style: $style;
+		}
+	}
+	border: {
+		radius: $radius;
+	}
+}
+// * 말줄임 설정(여러줄)
+@mixin line-clamp($line-num) {
+	display: -webkit-box;
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	word-break: break-all;
+	-webkit-line-clamp: $line-num;
+	line-clamp: $line-num;
+	-webkit-box-orient: vertical;
+}
+// * 말줄임 설정(한줄)
+@mixin text-ellipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+// * 스크롤바 색상 설정
+@mixin scrollbar($width, $thumb-bg, $thumb-radius, $track-bg: null) {
+	&::-webkit-scrollbar {
+		width: $width;
+		height: $width;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: $thumb-bg;
+		border-radius: $thumb-radius;
+	}
+	&::-webkit-scrollbar-track {
+		background-color: $track-bg;
+	}
+	&::-webkit-scrollbar-button {
+		width: $width;
+		height: $width;
+		background-color: transparent;
+	}
+}
+// * 포지션 설정
+@mixin position($pos: absolute,
+	$top: null,
+	$right: null,
+	$bottom: null,
+	$left: null,
+	$z-index: null,
+	$translateX: null,
+	$translateY: null) {
+	@if ($translateX and $translateY) {
+		transform: translateX($translateX) translateY($translateY);
+	}
+	@else if ($translateX) {
+		transform: translateX($translateX);
+	}
+	@else if ($translateY) {
+		transform: translateY($translateY);
+	}
+	position: $pos;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+	z-index: $z-index;
+}
+// * margin, padding 설정
+@for $i from 0 through 100 {
+	.mg-t#{$i} {
+		margin-top: $i + px $imp;
+	}
+	.mg-b#{$i} {
+		margin-bottom: $i + px $imp;
+	}
+	.mg-l#{$i} {
+		margin-left: $i + px $imp;
+	}
+	.mg-r#{$i} {
+		margin-right: $i + px $imp;
+	}
+	.pd-t#{$i} {
+		padding-top: $i + px $imp;
+	}
+	.pd-b#{$i} {
+		padding-bottom: $i + px $imp;
+	}
+	.pd-l#{$i} {
+		padding-left: $i + px $imp;
+	}
+	.pd-r#{$i} {
+		padding-right: $i + px $imp;
+	}
+	.t#{$i} {
+		top: $i + px $imp;
+	}
+	.r#{$i} {
+		right: $i + px $imp;
+	}
+	.b#{$i} {
+		bottom: $i + px $imp;
+	}
+	.l#{$i} {
+		left: $i + px $imp;
+	}
+}
+// * overflow
+@mixin overflow($position-x, $position-y) {
+	overflow: $position-x, $position-y;
+}
+
+// * gradient @mixin
+@mixin linear-gradient($solid: true) {
+	@if ($solid) {
+		background: linear-gradient(rgba(var(--c-black-rgb), 3%), rgba(var(--c-black-rgb), 3%));
+	}
+	@else {
+		background: linear-gradient(rgba(var(--c-black-rgb), 0), rgba(var(--c-black-rgb), 4%));
+	}
+}
+@mixin v-dotline {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -1px;
+	bottom: 0;
+	width: 2px;
+	background: url($icons-image-url+"ico-dashline-v.png") 0 2px repeat-y;
+	background-size: 2px auto;
+}
+// * border box 공통 속성 @mixin
+@mixin border-radius-box($bg: true, $border: true) {
+	position: relative;
+	border-radius: var(--default-radius);
+	@if ($bg and $border) {
+		border: 1px solid var(--border-default);
+		background: var(--c-white);
+	}
+	@else if ($bg) {
+		background: var(--c-white);
+	}
+	@else if ($border) {
+		border: 1px solid var(--border-default);
+	}
+}
+// * 어려줄 말줄임 @mixin
+@mixin line-clamp($line-num) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: $line-num;
+	-webkit-box-orient: vertical;
+}
+// * box-shadow @mixin
+@mixin box-shadow($top, $left, $blur, $color) {
+	box-shadow: $top $left $blur $color;
+}
+// * 이미지 가운데 정렬 @mixin
+@mixin image-center {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	height: auto;
+	margin: auto;
+}
+// * 아이템 이미지 없을 경우 대체 이미지 설정 @mixin
+@mixin no-image($large: true) {
+	background: {
+		image: url($common-image-url+"ico-nodata-image.png") $imp;
+		position: 50% 50% $imp;
+		repeat: no-repeat $imp;
+		color: var(--color-sub1) $imp;
+	}
+	@if ($large) {
+		background: {
+			size: auto 50px $imp;
+		}
+	}
+	@else {
+		background: {
+			size: auto 30px $imp;
+		}
+	}
+}
+// * 백그라운드 멀티플 @mixin
+@mixin bg-data-multiple($large: true) {
+	background-position: 50% 50% $imp;
+	background-repeat: no-repeat $imp;
+	@if ($large) {
+		background-size: cover, auto 50px $imp;
+	}
+	@else {
+		background-size: cover, auto 30px $imp;
+	}
+}
+
+// * important
+$imp: unquote("!important");
+
+// * Import
+@import "https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css";
+@import "fonts", "common", "icons", "buttons", "form", "modal", "alert", "tables", "components", "layouts", "contents", "vendor";
