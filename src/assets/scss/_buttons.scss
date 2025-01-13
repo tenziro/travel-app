@@ -15,8 +15,10 @@
 		column-gap: 4px;
 		overflow: auto hidden;
 		padding: 12px 20px;
-		&::-webkit-scrollbar {
-			display: none;
+		@media (hover: none) and (pointer: coarse) {
+			&::-webkit-scrollbar {
+				display: none;
+			}
 		}
 	}
 	&:before,
@@ -47,6 +49,7 @@
 .list-selected-filter {
 	border-block-start: 1px solid rgba(var(--c-gray-7-rgb), 80%);
 	border-block-end: 1px solid var(--border-default);
+	display: none;
 }
 // * 리스트 필터 - 초기화
 .btn-inline-reset {
