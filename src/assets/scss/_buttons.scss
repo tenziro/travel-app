@@ -1,13 +1,6 @@
 @charset "UTF-8";
 
 // * 리스트 필터
-.list-inline-filter-wrap {
-	border-block-start: 1px solid var(--border-default);
-	background: {
-		color: var(--default-bg);
-		attachment: fixed;
-	}
-}
 .list-inline-filter,
 .list-selected-filter {
 	@include position(relative);
@@ -36,7 +29,6 @@
 .list-inline-filter {
 	--btn-height: 34px;
 	--btn-weight: 34px;
-	// @include scrollbar(4px, var(--primary-blue), 2px);
 	.inline-list {
 		button {
 			flex: none;
@@ -62,7 +54,6 @@
 		color: var(--tertiary-blue);
 		font: {
 			size: var(--fs-extra);
-			family: "tabler-icons";
 			weight: var(--fw-medium);
 		}
 	}
@@ -139,56 +130,68 @@
 			content: "\eb55";
 			color: var(--c-gray-5);
 			font: {
-				family: "tabler-icons";
 				weight: var(--fw-semi);
 			}
 		}
 	}
 }
 
-// * 비자
-.list-inline-visa {
-	border-block-end: 1px solid var(--border-default);
-	background: {
-		color: var(--c-white);
+// * 새로고침
+.btn-list-refresh {
+	@include flex(inline-flex, null, null, center, null, null, center);
+	@include position(sticky, null, null, 16px, null, 1);
+	overflow: hidden;
+	left: 50%;
+	width: 0;
+	height: 36px;
+	padding: 0 16px;
+	color: var(--c-white);
+	transform: translateX(-50%);
+	animation: refresh-animation 1000ms forwards;
+	border: {
+		radius: 18px;
 	}
-	padding: 16px 20px;
-	dt {
-		@include flex(flex, null, null, center);
-		strong {
-			color: var(--primary-blue);
-			font: {
-				weight: var(--fw-semi);
-			}
+	background: {
+		color: rgba(var(--c-black-rgb), 80%);
+	}
+	span {
+		@include flex(inline-flex, null, null, center, null, null, center);
+		flex: none;
+		animation: refresh-text-animation 380ms 900ms forwards;
+		transform: translateY(200%);
+		font: {
+			size: var(--fs-small);
+			weight: var(--fw-medium);
 		}
 		&:before {
-			color: var(--primary-blue);
 			flex: none;
-			margin-right: 6px;
+			margin-right: 4px;
+			content: "\eb13";
 			font: {
-				family: "tabler-icons";
+				size: var(--fs-large);
 			}
-			content: "\f9e4";
-		}
-		.ti-exclamation-circle {
-			font: {
-				size: var(--fs-medium);
-			}
-			margin-left: 4px;
-			color: var(--c-gray-3);
 		}
 	}
-	dd {
-		margin-top: 4px;
-		font: {
-			size: var(--fs-medium);
-		}
-		strong {
-			flex: none;
-		}
-		span {
-			flex: none;
-			color: var(--c-gray-3);
-		}
+	+ .payment-notice {
+		margin-top: 0 $imp;
+	}
+}
+
+@keyframes refresh-animation {
+	from {
+		opacity: 0;
+		width: 0;
+	}
+	to {
+		opacity: 100%;
+		width: 96px;
+	}
+}
+@keyframes refresh-text-animation {
+	from {
+		transform: translateY(200%);
+	}
+	to {
+		transform: translateY(0);
 	}
 }

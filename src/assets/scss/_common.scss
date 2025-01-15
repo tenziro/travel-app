@@ -9,6 +9,9 @@
 	box-sizing: border-box;
 	&:after,
 	&:before {
+		font: {
+			family: "tabler-icons";
+		}
 		box-sizing: border-box;
 		pointer-events: none;
 	}

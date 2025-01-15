@@ -1,5 +1,146 @@
 @charset "UTF-8";
 
+// * 출장규정
+.trip-rules {
+	@include flex(flex, null, null, center);
+	padding: 10px 20px;
+	.my-rules {
+		@include flex(inline-flex, null, null, center);
+		@include border(all, 1px, solid, var(--border-default), var(--rd-small));
+		padding: 4px 8px;
+		font: {
+			size: var(--fs-xsmall);
+			weight: var(--fw-medium);
+		}
+		&:before {
+			content: "\eb49";
+			flex: none;
+			color: var(--primary-blue);
+			margin-right: 2px;
+			font: {
+				size: 16px;
+			}
+		}
+	}
+	.rules {
+		@include flex(inline-flex, null, null, center);
+		flex: none;
+		margin-left: auto;
+		gap: 8px;
+		li {
+			@include flex(inline-flex, null, null, center);
+			flex: none;
+			font: {
+				weight: var(--fw-medium);
+			}
+			&:before {
+				flex: none;
+				color: inherit;
+				margin-right: 2px;
+				font: {
+					size: 20px;
+				}
+			}
+			&.suitable {
+				color: var(--primary-blue);
+				&:before {
+					content: "\ea67";
+				}
+			}
+			&.unsuitable {
+				color: var(--c-point-1);
+				&:before {
+					content: "\f703";
+				}
+			}
+		}
+	}
+}
+
+// * 정렬
+.list-result-top {
+	@include flex(flex, null, null, center);
+	padding: 14px 20px;
+	border-block-start: 1px solid var(--border-default);
+	.btn-list-filter {
+		@include flex(inline-flex, null, null, center);
+		margin-left: auto;
+		color: var(--c-gray-3);
+		font: {
+			size: var(--fs-small);
+			weight: var(--fw-medium);
+		}
+		&:before {
+			content: "\fb81";
+			flex: none;
+			margin-right: 4px;
+			color: inherit;
+			font: {
+				size: var(--fs-extra);
+			}
+		}
+	}
+}
+// * 리스트 필터
+.list-inline-filter-wrap {
+	@include position(sticky, 0, null, null, null, 10);
+	border-block-start: 1px solid var(--border-default);
+	background: {
+		color: var(--default-bg);
+		attachment: fixed;
+	}
+}
+// * 비자
+.list-inline-visa {
+	padding: 16px 20px;
+	border-block-end: 1px solid var(--border-default);
+	background: {
+		color: var(--c-white);
+	}
+	dt {
+		@include flex(flex, null, null, center);
+		strong {
+			color: var(--primary-blue);
+			font: {
+				size: var(--fs-small);
+				weight: var(--fw-semi);
+			}
+		}
+		&:before {
+			content: "\f9e4";
+			flex: none;
+			color: var(--primary-blue);
+			margin-right: 6px;
+		}
+		.ti-exclamation-circle {
+			color: var(--c-gray-3);
+			margin-left: 4px;
+			font: {
+				size: var(--fs-medium);
+			}
+		}
+	}
+	dd {
+		@include flex(flex, null, wrap, center);
+		margin-top: 4px;
+		.flag,
+		strong,
+		span {
+			flex: none;
+		}
+		.flag {
+			flex: none;
+			width: 16px;
+			aspect-ratio: 4/3;
+			margin-right: 4px;
+		}
+		span {
+			color: var(--c-gray-3);
+		}
+	}
+}
+
+// * 항공 검색 결과 아이템
 .flight-list-item {
 	@include position(relative);
 	padding: 16px 20px;
@@ -8,6 +149,11 @@
 		&-name {
 			@include flex(flex, null, null, center);
 			margin-bottom: 8px;
+			.airline-logo {
+				flex: none;
+				width: 20px;
+				margin-right: 6px;
+			}
 			strong {
 				flex: none;
 				color: var(--c-black);
@@ -43,18 +189,24 @@
 			column-gap: 4px;
 			.benefit-label {
 				padding: 4px 6px;
-				color: var(--c-gray-2);
 				border-radius: 3px;
-				background: {
-					color: var(--default-bg);
-				}
 				font: {
 					size: var(--fs-xxsmall);
 					weight: var(--fw-semi);
 				}
+				background: {
+					color: var(--default-bg);
+				}
+				&:not(.danger) {
+					color: var(--c-gray-2);
+				}
+				&.danger {
+					color: var(--c-point-1);
+				}
 			}
 		}
 		&-info-detail {
+			@include position(relative);
 			flex: 0 0 100%;
 			margin-top: 4px;
 			.btn-schedule-detail {
@@ -64,30 +216,160 @@
 				}
 				&:after {
 					flex: none;
-					color: var(--c-gray-4);
+					color: var(--c-gray-3);
 					margin-left: 2px;
-					font: {
-						size: var(--fs-base);
-						family: "tabler-icons";
+					content: "\f7c6";
+				}
+				@media (hover: none) and (pointer: coarse) {
+					&:focus {
+						+ .schedule-detail-layer {
+							visibility: visible;
+						}
 					}
 				}
-				&[aria-expanded="false"] {
-					&:after {
-						content: "\ea5f";
+				@media (hover: hover) and (pointer: fine) {
+					&:hover,
+					&:focus {
+						+ .schedule-detail-layer {
+							visibility: visible;
+						}
 					}
 				}
-				&[aria-expanded="true"] {
-					&:after {
-						content: "\ea62";
+			}
+			.schedule-detail-layer {
+				@include position(absolute, 100%, 0, null, 0, 2, null, 8px);
+				@include border(all, 1px, solid, var(--c-gray-3), var(--rd-small));
+				@include box-shadow(0, 0, 4px, rgba(var(--c-black-rgb), 10%));
+				visibility: hidden;
+				padding: 12px;
+				background: {
+					color: var(--c-white);
+				}
+				.ol-schedule {
+					li {
+						@include flex(flex, column, null, flex-start);
+						@include position(relative);
+						row-gap: 6px;
+						padding-left: 20px;
+						.airport {
+							@include flex(flex, null, null, center);
+							strong, span {
+								flex: none;
+							}
+							strong {
+								font: {
+									size: var(--fs-medium);
+									weight: var(--fw-semi);
+								}
+							}
+							span {
+								color: var(--c-gray-3);
+								margin-left: 4px;
+								font: {
+									size: var(--fs-small);
+									weight: var(--fw-semi);
+								}
+							}
+						}
+						.time {
+							@include flex(flex, null, null, flex-start);
+							&:before {
+								content: "\f31a";
+								flex: none;
+								margin-right: 4px;
+								font: {
+									size: var(--fs-medium);
+								}
+							}
+							p {
+								&:not(.turnaround) {
+									font: {
+										size: var(--fs-small);
+										weight: var(--fw-medium);
+									}
+								}
+							}
+							.turnaround {
+								color: var(--c-gray-3);
+								margin-top: 4px;
+								font: {
+									size: var(--fs-xsmall);
+								}
+							}
+						}
+						.airline {
+							@include flex(flex, null, null, center);
+							.airline-logo {
+								flex: none;
+								width: 14px;
+								margin-right: 4px;
+							}
+							span {
+								font: {
+									weight: var(--fw-medium);
+								}
+							}
+						}
+						&:before {
+							@include position(absolute, null, null, null, 3px, 0);
+							content: "";
+							width: 1px;
+							background-color: var(--border-default);
+						}
+						&:after {
+							@include position(absolute, null, null, null, 0, 1);
+							content: "";
+							width: 7px;
+							height: 7px;
+							border: {
+								radius: var(--rd-full);
+							}
+						}
+						&:not(:first-child):not(:last-child) {
+							padding-top: 20px;
+							&:before {
+								top: 0;
+								bottom: 0;
+							}
+							&:after {
+								@include border(all, 1px, solid, var(--secondary-blue));
+								top: 26px;
+								background-color: var(--c-white);
+							}
+						}
+						&:first-child {
+							&:before {
+								top: 6px;
+								bottom: 0;
+							}
+							&:after {
+								top: 6px;
+								background-color: var(--primary-blue);
+							}
+						}
+						&:last-child {
+							padding-top: 20px;
+							&:before {
+								top: 0;
+								height: 26px;
+							}
+							&:after {
+								top: 26px;
+								background-color: var(--primary-blue);
+							}
+						}
 					}
 				}
 			}
 		}
 	}
-	.seat-class {
-		flex: none;
-		margin-left: auto;
-		.seat-class-default {
+	.seat {
+		&-class {
+			@include position(relative);
+			flex: none;
+			margin-left: auto;
+		}
+		&-class-default {
 			@include flex(inline-flex, null, null, center);
 			span {
 				flex: none;
@@ -104,7 +386,46 @@
 				margin-left: 2px;
 				font: {
 					size: var(--fs-medium);
-					family: "tabler-icons";
+				}
+			}
+			@media (hover: none) and (pointer: coarse) {
+				&:focus {
+					+ .seat-detail-layer {
+						visibility: visible;
+					}
+				}
+			}
+			@media (hover: hover) and (pointer: fine) {
+				&:hover,
+				&:focus {
+					+ .seat-detail-layer {
+						visibility: visible;
+					}
+				}
+			}
+		}
+		&-detail-layer {
+			@include position(absolute, 100%, 0, null, null, 2, null, 4px);
+			@include border(all, 1px, solid, var(--c-gray-3), var(--rd-small));
+			@include box-shadow(0, 0, 4px, rgba(var(--c-black-rgb), 10%));
+			width: max-content;
+			padding: 12px;
+			background: {
+				color: var(--c-white);
+			}
+			visibility: hidden;
+			li {
+				font: {
+					size: var(--fs-xsmall);
+				}
+				+ li {
+					margin-top: 2px;
+				}
+				&.text {
+					color: var(--primary-blue);
+					margin-top: 4px;
+					text-decoration: underline;
+					text-underline-offset: 4px;
 				}
 			}
 		}
@@ -139,7 +460,6 @@
 					color: var(--c-gray-5);
 					font: {
 						size: var(--fs-large);
-						family: "tabler-icons";
 					}
 				}
 			}
@@ -169,5 +489,30 @@
 	}
 	.item-selected-schedule {
 		@include position(absolute, 0, 0, 0, 0, 0);
+	}
+}
+.list-nodata {
+	@include flex(flex, column, wrap, center, null, null, center);
+	padding: 40px 20px;
+	.ti {
+		color: var(--c-point-1);
+		font: {
+			size: 40px;
+		}
+	}
+	.title {
+		margin-top: 10px;
+		font: {
+			size: var(--fs-medium);
+			weight: var(--fw-semi);
+		}
+	}
+	.text {
+		color: var(--c-gray-3);
+		margin-top: 4px;
+		font: {
+			size: var(--fs-small);
+			weight: var(--fw-medium);
+		}
 	}
 }

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+#wrap {
+	@include position(relative);
+}
+.modal-open {
+	overflow: hidden;
+}

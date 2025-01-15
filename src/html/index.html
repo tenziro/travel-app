@@ -6,142 +6,290 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 		<link rel='stylesheet' href='../assets/css/base.css'>
 		<title>Travel App</title>
+		<script src="../assets/js/common.js"></script>
 	</head>
 
 	<body>
-		<!-- * 필터 -->
-		<div class="list-inline-filter-wrap">
-			<div class="list-inline-filter">
-				<div class="inline-list">
-					<button aria-label="필터초기화" class="btn-inline-reset"></button>
-					<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>직항/경유</span></button>
-					<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>요금조건</span></button>
-					<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>항공사</span></button>
-					<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>시간</span></button>
-					<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>가격</span></button>
-					<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>공항</span></button>
-					<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>경유지</span></button>
-					<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>기타</span></button>
+		<div id="wrap">
+			<div id="contents">
+				<!-- * 출장 규정 -->
+				<div class="trip-rules">
+					<div class="my-rules">내 출장규정 : 일반석</div>
+					<ul class="rules">
+						<li class="suitable">적합</li>
+						<li class="unsuitable">초과</li>
+					</ul>
 				</div>
+				<!-- * 리스트 상단 -->
+				<div class="list-result-top">
+					<button type="button" class="btn-list-filter" role="button" aria-haspopup="true">추천순</button>
+				</div>
+				<!-- * 필터 -->
+				<div class="list-inline-filter-wrap">
+					<div class="list-inline-filter">
+						<div class="inline-list">
+							<button aria-label="필터초기화" class="btn-inline-reset"></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>직항/경유</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>요금조건</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>항공사</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>시간</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>가격</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>공항</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>경유지</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>기타</span></button>
+						</div>
+					</div>
+					<div class="list-selected-filter">
+						<div class="inline-list">
+							<span class="selected-filter">
+								<span class="selected-filter-text">직항</span>
+								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
+								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
+							</span>
+							<span class="selected-filter">
+								<span class="selected-filter-text">대한항공</span>
+								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
+								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
+							</span>
+							<span class="selected-filter">
+								<span class="selected-filter-text">아시아나항공</span>
+								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
+								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
+							</span>
+							<span class="selected-filter">
+								<span class="selected-filter-text">환불가능</span>
+								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
+								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
+							</span>
+							<span class="selected-filter">
+								<span class="selected-filter-text">마일리지적립</span>
+								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
+								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
+							</span>
+							<span class="selected-filter">
+								<span class="selected-filter-text">07:00~12:00</span>
+								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
+								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!-- * 비자 -->
+				<dl class="list-inline-visa">
+					<dt><strong>비자 안내</strong><button type="button" class="ti ti-exclamation-circle" aria-label="비자정보 상세보기"></button></dt>
+					<dd><img src="https://flagicons.lipis.dev/flags/4x3/th.svg" alt="태국" class="flag"><strong>'태국' 방문시 무비자</strong><span>(최대 90일)</span></dd>
+				</dl>
+				<!-- * 항공 검색결과 아이템 -->
+				<div class="flight-list-item">
+					<div class="flight-name">
+						<img src="../assets/images/img/7C_Small.png" alt="제주항공" class="airline-logo">
+						<strong>제주항공</strong>
+						<span class="code-share">에어서울 공동운항</span>
+					</div>
+					<div class="flight-info">
+						<ul class="list-schedule">
+							<li><strong>09:00</strong><span>ICN</span></li>
+							<li><strong>18:00</strong><span>BKK</span></li>
+						</ul>
+						<div class="seat-class">
+							<button type="button" class="seat-class-default" aria-haspopup="true" aria-expanded="false"><span>L Class</span></button>
+							<ul class="seat-detail-layer">
+								<li>ICN - BKK : <strong>L Class</strong></li>
+								<li class="text">L Class의 마일리지 적립율은 0%입니다.</li>
+							</ul>
+						</div>
+						<div class="flight-info-detail">
+							<button type="button" class="btn-schedule-detail" aria-haspopup="true" aria-expanded="false"><strong>경유 1</strong>, 9시간 00분 소요</button>
+							<div class="schedule-detail-layer">
+								<ol class="ol-schedule">
+									<li>
+										<p class="airport"><strong>인천 국제공항</strong><span>ICN</span></p>
+										<p class="airline"><img src="../assets/images/img/7C_Small.png" alt="제주항공" class="airline-logo"><span>제주항공 7C550</span></p>
+										<div class="time">
+											<div>
+												<p>24.01.01(목) 21:30 출발</p>
+												<p class="turnaround">총 3시간 20분 소요</p>
+											</div>
+										</div>
+									</li>
+									<li>
+										<p class="airport"><strong>하데나 국제공항</strong><span>HND</span></p>
+										<p class="airline"><img src="../assets/images/img/7C_Small.png" alt="제주항공" class="airline-logo"><span>제주항공 7C545</span></p>
+										<div class="time">
+											<div>
+												<p>24.01.01(목) 21:30 출발</p>
+												<p class="turnaround">총 3시간 20분 소요</p>
+											</div>
+										</div>
+									</li>
+									<li>
+										<p class="airport"><strong>수안나폼 국제공항</strong><span>BKK</span></p>
+										<p class="time">24.01.01(금) 00:50 도착</p>
+									</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<ul class="flight-benefit">
+						<li class="benefit-label">환불가능</li>
+						<li class="benefit-label">무료수화물</li>
+					</ul>
+					<div class="price">
+						<span class="available-seat">잔여 1석</span><strong>649,000원</strong>
+					</div>
+					<button type="button" class="item-selected-schedule" aria-label="선택"></button>
+				</div>
+				<!-- * 항공 검색결과 아이템 -->
+				<div class="flight-list-item">
+					<div class="flight-name">
+						<img src="../assets/images/img/KE_Small.png" alt="대한항공" class="airline-logo">
+						<strong>대한항공</strong>
+					</div>
+					<div class="flight-info">
+						<ul class="list-schedule">
+							<li><strong>09:10</strong><span>ICN</span></li>
+							<li><strong>13:10</strong><span>BKK</span></li>
+						</ul>
+						<div class="seat-class">
+							<button type="button" class="seat-class-default"><span>T Class</span></button>
+							<ul class="seat-detail-layer" role="tooltip">
+								<li>ICN - BKK : <strong>T Class</strong></li>
+								<li class="text">T Class의 마일리지 적립율은 50%입니다.</li>
+							</ul>
+						</div>
+						<div class="flight-info-detail">
+							<button type="button" class="btn-schedule-detail"><strong>직항</strong>, 5시간 00분 소요</button>
+							<div class="schedule-detail-layer" role="tooltip">
+								<ol class="ol-schedule">
+									<li>
+										<p class="airport"><strong>인천 국제공항</strong><span>ICN</span></p>
+										<p class="airline"><img src="../assets/images/img/KE_Small.png" alt="대한항공" class="airline-logo"><span>대한항공 KE550</span></p>
+										<div class="time">
+											<div>
+												<p>24.01.01(목) 21:30 출발</p>
+												<p class="turnaround">총 3시간 20분 소요</p>
+											</div>
+										</div>
+									</li>
+									<li>
+										<p class="airport"><strong>하데나 국제공항</strong><span>HND</span></p>
+										<p class="airline"><img src="../assets/images/img/KE_Small.png" alt="대한항공" class="airline-logo"><span>대한항공 KE545</span></p>
+										<div class="time">
+											<div>
+												<p>24.01.01(목) 21:30 출발</p>
+												<p class="turnaround">총 3시간 20분 소요</p>
+											</div>
+										</div>
+									</li>
+									<li>
+										<p class="airport"><strong>수안나폼 국제공항</strong><span>BKK</span></p>
+										<p class="time">24.01.01(금) 00:50 도착</p>
+									</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<ul class="flight-benefit">
+						<li class="benefit-label">환불가능</li>
+						<li class="benefit-label">무료수화물</li>
+					</ul>
+					<div class="price">
+						<span class="available-seat">잔여 3석</span><strong>649,000원</strong>
+					</div>
+					<button type="button" class="item-selected-schedule" aria-label="선택"></button>
+				</div>
+				<!-- * 항공 검색결과 아이템 -->
+				<div class="flight-list-item">
+					<div class="flight-name">
+						<img src="../assets/images/img/7C_Small.png" alt="제주항공" class="airline-logo">
+						<strong>제주항공</strong>
+						<span class="code-share">에어서울 공동운항</span>
+					</div>
+					<div class="flight-info">
+						<ul class="list-schedule">
+							<li><strong>09:00</strong><span>ICN</span></li>
+							<li><strong>18:00</strong><span>BKK</span></li>
+						</ul>
+						<div class="seat-class">
+							<button type="button" class="seat-class-default" aria-haspopup="true" aria-expanded="false"><span>L Class</span></button>
+							<ul class="seat-detail-layer">
+								<li>ICN - BKK : <strong>L Class</strong></li>
+								<li class="text">L Class의 마일리지 적립율은 0%입니다.</li>
+							</ul>
+						</div>
+						<div class="flight-info-detail">
+							<button type="button" class="btn-schedule-detail" aria-haspopup="true" aria-expanded="false"><strong>경유 1</strong>, 9시간 00분 소요</button>
+							<div class="schedule-detail-layer">
+								<ol class="ol-schedule">
+									<li>
+										<p class="airport"><strong>인천 국제공항</strong><span>ICN</span></p>
+										<p class="airline"><img src="../assets/images/img/7C_Small.png" alt="제주항공" class="airline-logo"><span>제주항공 7C550</span></p>
+										<div class="time">
+											<div>
+												<p>24.01.01(목) 21:30 출발</p>
+												<p class="turnaround">총 3시간 20분 소요</p>
+											</div>
+										</div>
+									</li>
+									<li>
+										<p class="airport"><strong>하데나 국제공항</strong><span>HND</span></p>
+										<p class="airline"><img src="../assets/images/img/7C_Small.png" alt="제주항공" class="airline-logo"><span>제주항공 7C545</span></p>
+										<div class="time">
+											<div>
+												<p>24.01.01(목) 21:30 출발</p>
+												<p class="turnaround">총 3시간 20분 소요</p>
+											</div>
+										</div>
+									</li>
+									<li>
+										<p class="airport"><strong>수안나폼 국제공항</strong><span>BKK</span></p>
+										<p class="time">24.01.01(금) 00:50 도착</p>
+									</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<ul class="flight-benefit">
+						<li class="benefit-label danger">환불불가</li>
+						<li class="benefit-label">무료수화물</li>
+					</ul>
+					<div class="price">
+						<span class="available-seat">잔여 5석</span><strong>449,000원</strong>
+					</div>
+					<button type="button" class="item-selected-schedule" aria-label="선택"></button>
+				</div>
+				<!-- * 검색 결과 없음 -->
+				<div class="list-nodata">
+					<i class="ti ti-alert-triangle-filled"></i>
+					<p class="title">검색결과가 없습니다.</p>
+					<p class="text">다른 조건으로 재검색 해보세요!</p>
+				</div>
+				<!-- * 새로고침 -->
+				<button type="button" class="btn-list-refresh"><span>새로고침</span></button>
 			</div>
-			<div class="list-selected-filter">
-				<div class="inline-list">
-					<span class="selected-filter">
-						<span class="selected-filter-text">직항</span>
-						<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
-						<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
-					</span>
-					<span class="selected-filter">
-						<span class="selected-filter-text">대한항공</span>
-						<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
-						<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
-					</span>
-					<span class="selected-filter">
-						<span class="selected-filter-text">아시아나항공</span>
-						<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
-						<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
-					</span>
-					<span class="selected-filter">
-						<span class="selected-filter-text">환불가능</span>
-						<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
-						<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
-					</span>
-					<span class="selected-filter">
-						<span class="selected-filter-text">마일리지적립</span>
-						<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
-						<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
-					</span>
-					<span class="selected-filter">
-						<span class="selected-filter-text">07:00~12:00</span>
-						<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
-						<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
-					</span>
+			<div class="modal" data-type="bottom">
+				<div class="modal-contents">
+					<button type="button" role="button" aria-label="필터 닫기" class="btn-modal-mo-close"></button>
+					<div class="modal-header">
+						<h1 class="title">검색결과 정렬</h1>
+						<button type="button" role="button" aria-label="필터 닫기" class="btn-modal-close"></button>
+					</div>
+					<div class="modal-body">
+						<!-- <dl class="modal-filter-list">
+							<dt>직항 구분</dt>
+							<dd></dd>
+						</dl>
+						<dl class="modal-filter-list">
+							<dt>직항 구분</dt>
+							<dd></dd>
+						</dl> -->
+					</div>
+					<div class="modal-footer">
+						<button type="button" role="button" class="btn-modal-apply">적용하기</button>
+					</div>
 				</div>
 			</div>
 		</div>
-		<!-- * 비자 -->
-		<dl class="list-inline-visa">
-			<dt><strong>비자 안내</strong><button type="button" class="ti ti-exclamation-circle" aria-label="비자정보 상세보기"></button></dt>
-			<dd><strong>'태국' 방문시 무비자</strong><span>(최대 90일)</span></dd>
-		</dl>
-		<!-- * 항공 검색결과 아이템 -->
-		<div class="flight-list-item">
-			<div class="flight-name"><strong>제주항공</strong><span class="code-share">델타항공 공동운항</span></div>
-			<div class="flight-info">
-				<ul class="list-schedule">
-					<li><strong>09:00</strong><span>ICN</span></li>
-					<li><strong>18:00</strong><span>BKK</span></li>
-				</ul>
-				<div class="seat-class">
-					<button type="button" class="seat-class-default" aria-haspopup="true" aria-expanded="false"><span>L클래스</span></button>
-				</div>
-				<div class="flight-info-detail"><button type="button" class="btn-schedule-detail" aria-haspopup="true" aria-expanded="false"><strong>경유 1</strong>, 9시간 00분 소요</button></div>
-			</div>
-			<ul class="flight-benefit">
-				<li class="benefit-label">무료수화물</li>
-				<li class="benefit-label">환불가능</li>
-			</ul>
-			<div class="price">
-				<span class="available-seat">잔여 1석</span><strong>649,000원</strong>
-			</div>
-			<button type="button" class="item-selected-schedule" aria-label="선택"></button>
-		</div>
-		<!-- * 항공 검색결과 아이템 -->
-		<div class="flight-list-item">
-			<div class="flight-name"><strong>대한항공</strong></div>
-			<div class="flight-info">
-				<ul class="list-schedule">
-					<li><strong>09:10</strong><span>ICN</span></li>
-					<li><strong>13:10</strong><span>BKK</span></li>
-				</ul>
-				<div class="seat-class">
-					<button type="button" class="seat-class-default" aria-haspopup="true" aria-expanded="false"><span>L클래스</span></button>
-				</div>
-				<div class="flight-info-detail"><button type="button" class="btn-schedule-detail" aria-haspopup="true" aria-expanded="false"><strong>직항</strong>, 5시간 00분 소요</button></div>
-			</div>
-			<ul class="flight-benefit">
-				<li class="benefit-label">무료수화물</li>
-				<li class="benefit-label">환불가능</li>
-			</ul>
-			<div class="price">
-				<span class="available-seat">잔여 3석</span><strong>649,000원</strong>
-			</div>
-			<button type="button" class="item-selected-schedule" aria-label="선택"></button>
-		</div>
-		<script>
-			document.querySelectorAll('.btn-schedule-detail').forEach(button => {
-				button.addEventListener('click', () => {
-					const isChecked = button.getAttribute('aria-expanded') === 'true';
-					button.setAttribute('aria-expanded', !isChecked);
-				});
-			});
-			document.querySelectorAll('.btn-inline-filter').forEach(button => {
-				button.addEventListener('click', () => {
-					const isChecked = button.getAttribute('aria-checked') === 'true';
-					button.setAttribute('aria-checked', !isChecked);
-					const listSelectedFilter = document.querySelector('.list-selected-filter');
-					const hasCheckedFilter = Array.from(document.querySelectorAll('.btn-inline-filter')).some(filterButton => filterButton.getAttribute('aria-checked') === 'true');
-					if (listSelectedFilter) {
-						listSelectedFilter.style.display = hasCheckedFilter ? 'block' : 'none';
-					}
-				});
-			});
-			document.querySelectorAll('.btn-infilter-delete').forEach(button => {
-				button.addEventListener('click', () => {
-					const parent = button.closest('.selected-filter');
-					if (parent) {
-						parent.remove();
-						const list = document.querySelector('.list-selected-filter');
-						if (list && list.querySelectorAll('.selected-filter').length === 0) {
-							list.style.display = 'none';
-							document.querySelectorAll('.list-inline-filter-wrap .btn-inline-filter').forEach(filterButton => {
-								filterButton.setAttribute('aria-checked', 'false');
-							});
-						}
-					}
-				});
-			});
-		</script>
 	</body>
 
 </html>
