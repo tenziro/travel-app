@@ -1,5 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+	document.addEventListener("touchstart", function () { }, true);
 	const handleAlignModal = () => {
 		let touchStartY = 0;
 		let touchEndY = 0;
