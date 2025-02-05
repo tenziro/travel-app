@@ -29,10 +29,20 @@
 		flex: 1 1;
 		button {
 			text-align: center;
+			@include flex(flex, column, null, center, null, null, center);
+			row-gap: 6px;
 			flex: 1 1;
-			height: 49px;
-			font: {
-				size: var(--fs-black);
+			padding: 12px 0;
+			.ti {
+				font: {
+					size: var(--fs-black);
+				}
+			}
+			span {
+				font: {
+					size: var(--fs-small);
+					weight: var(--fw-medium)
+				}
 			}
 			&[aria-checked="true"] {
 				color: var(--c-white);
