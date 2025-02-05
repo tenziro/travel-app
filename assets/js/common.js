@@ -73,9 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 	// 모바일 확인 
 	const handleDeviceCheck = () => {
+		const btnModalMobileClose = document.querySelector('.btn-modal-mo-close');
 		const btnModalClose = document.querySelector('.btn-modal-close');
 		const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 		btnModalClose.style.display = isMobile ? 'none' : 'block';
+		btnModalMobileClose.style.display = isMobile ? 'block' : 'none';
 	};
 
 	handleDeviceCheck();
