@@ -54,6 +54,44 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	};
+	// 좌석 클래스 안내
+	const toggleSeatClass = () => {
+		const seatClassButtons = document.querySelectorAll('.seat-class-default');
+		const handleClick = (event) => {
+			seatClassButtons.forEach(button => {
+				button.setAttribute('aria-expanded', 'false');
+			});
+			event.currentTarget.setAttribute('aria-expanded', 'true');
+		};
+		const handleBodyInteraction = () => {
+			seatClassButtons.forEach(button => {
+				button.setAttribute('aria-expanded', 'false');
+			});
+		};
+		seatClassButtons.forEach(button => {
+			button.addEventListener('click', handleClick);
+		});
+		document.body.addEventListener('touchstart', handleBodyInteraction);
+	};
+	// 여정 안내
+	const toggleFlightScheduleDetail = () => {
+		const scheduleDetailButtons = document.querySelectorAll('.btn-schedule-detail');
+		const handleClick = (event) => {
+			scheduleDetailButtons.forEach(button => {
+				button.setAttribute('aria-expanded', 'false');
+			});
+			event.currentTarget.setAttribute('aria-expanded', 'true');
+		};
+		const handleBodyInteraction = () => {
+			scheduleDetailButtons.forEach(button => {
+				button.setAttribute('aria-expanded', 'false');
+			});
+		};
+		scheduleDetailButtons.forEach(button => {
+			button.addEventListener('click', handleClick);
+		});
+		document.body.addEventListener('touchstart', handleBodyInteraction);
+	};
 	// 선택한 필터 삭제
 	const handleFilterDelete = () => {
 		document.querySelectorAll('.btn-infilter-delete').forEach(button => {
@@ -80,9 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		btnModalClose.style.display = isMobile ? 'none' : 'block';
 		btnModalMobileClose.style.display = isMobile ? 'block' : 'none';
 	};
-
 	handleDeviceCheck();
 	handleAlignModal();
 	toggleAriaChecked();
+	toggleSeatClass();
+	toggleFlightScheduleDetail();
 	handleFilterDelete();
 });

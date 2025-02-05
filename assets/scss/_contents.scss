@@ -220,7 +220,7 @@
 					margin-left: 2px;
 					content: "\f7c6";
 				}
-				&:focus {
+				&[aria-expanded="true"] {
 					+ .schedule-detail-layer {
 						visibility: visible;
 					}
@@ -378,7 +378,7 @@
 					size: var(--fs-medium);
 				}
 			}
-			&:focus {
+			&[aria-expanded="true"] {
 				+ .seat-detail-layer {
 					visibility: visible;
 				}
