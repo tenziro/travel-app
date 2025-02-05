@@ -2,7 +2,44 @@
 
 #wrap {
 	@include position(relative);
+	@include flex(flex, column);
+	height: 100dvh;
+}
+#contents {
+	flex: 1 1;
+	overflow-y: auto;
 }
 .modal-open {
 	overflow: hidden;
+}
+
+.nav-bottom {
+	flex: none;
+	padding-bottom: env(safe-area-inset-bottom);
+	padding-left: env(safe-area-inset-left);
+	padding-right: env(safe-area-inset-right);
+	background: {
+		color: var(--primary-blue);
+	}
+	ul {
+		@include flex(flex);
+	}
+	li {
+		@include flex(flex, null, null, center, null, null, center);
+		flex: 1 1;
+		button {
+			text-align: center;
+			flex: 1 1;
+			height: 49px;
+			font: {
+				size: var(--fs-black);
+			}
+			&[aria-checked="true"] {
+				color: var(--c-white);
+			}
+			&[aria-checked="false"] {
+				color: rgba(var(--c-white-rgb), 50%);
+			}
+		}
+	}
 }

@@ -220,19 +220,9 @@
 					margin-left: 2px;
 					content: "\f7c6";
 				}
-				@media (hover: none) and (pointer: coarse) {
-					&:focus {
-						+ .schedule-detail-layer {
-							visibility: visible;
-						}
-					}
-				}
-				@media (hover: hover) and (pointer: fine) {
-					&:hover,
-					&:focus {
-						+ .schedule-detail-layer {
-							visibility: visible;
-						}
+				&:focus {
+					+ .schedule-detail-layer {
+						visibility: visible;
 					}
 				}
 			}
@@ -388,19 +378,9 @@
 					size: var(--fs-medium);
 				}
 			}
-			@media (hover: none) and (pointer: coarse) {
-				&:focus {
-					+ .seat-detail-layer {
-						visibility: visible;
-					}
-				}
-			}
-			@media (hover: hover) and (pointer: fine) {
-				&:hover,
-				&:focus {
-					+ .seat-detail-layer {
-						visibility: visible;
-					}
+			&:focus {
+				+ .seat-detail-layer {
+					visibility: visible;
 				}
 			}
 		}
