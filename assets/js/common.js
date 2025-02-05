@@ -71,6 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	};
+	// 모바일 확인 
+	const handleDeviceCheck = () => {
+		const btnModalClose = document.querySelector('.btn-modal-close');
+		const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+		btnModalClose.style.display = isMobile ? 'none' : 'block';
+	};
+
+	handleDeviceCheck();
 	handleAlignModal();
 	toggleAriaChecked();
 	handleFilterDelete();
