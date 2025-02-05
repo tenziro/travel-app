@@ -469,6 +469,7 @@
 	}
 	.item-selected-schedule {
 		@include position(absolute, 0, 0, 0, 0, 0);
+		display: none;
 	}
 }
 .list-nodata {
