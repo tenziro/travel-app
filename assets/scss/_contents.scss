@@ -378,7 +378,7 @@
 					size: var(--fs-medium);
 				}
 			}
-			&:focus {
+			&:focus-visible {
 				+ .seat-detail-layer {
 					visibility: visible;
 				}
