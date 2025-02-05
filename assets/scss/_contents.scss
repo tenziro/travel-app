@@ -448,6 +448,7 @@
 	.seat-class-default,
 	.btn-schedule-detail {
 		@include position(relative, null, null, null, null, 1);
+		background-color: red;
 	}
 	.price {
 		@include flex(flex, null, null, center, null, null, flex-end);
