@@ -220,6 +220,13 @@
 					margin-left: 2px;
 					content: "\f7c6";
 				}
+				@media (hover: hover) and (pointer: fine) {
+					&:focus {
+						+ .schedule-detail-layer {
+							visibility: visible;
+						}
+					}
+				}
 				&[aria-expanded="true"] {
 					+ .schedule-detail-layer {
 						visibility: visible;
@@ -378,6 +385,13 @@
 					size: var(--fs-medium);
 				}
 			}
+			@media (hover: hover) and (pointer: fine) {
+				&:focus {
+					+ .seat-detail-layer {
+						visibility: visible;
+					}
+				}
+			}
 			&[aria-expanded="true"] {
 				+ .seat-detail-layer {
 					visibility: visible;
@@ -469,7 +483,6 @@
 	}
 	.item-selected-schedule {
 		@include position(absolute, 0, 0, 0, 0, 0);
-		display: none;
 	}
 }
 .list-nodata {

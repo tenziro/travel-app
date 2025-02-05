@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			button.addEventListener('click', handleClick);
 		});
 		document.body.addEventListener('touchstart', handleBodyInteraction);
+		document.body.addEventListener('', handleBodyInteraction);
 	};
 	// 여정 안내
 	const toggleFlightScheduleDetail = () => {
@@ -117,11 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 		btnModalClose.style.display = isMobile ? 'none' : 'block';
 		btnModalMobileClose.style.display = isMobile ? 'block' : 'none';
+		if (isMobile) {
+			toggleSeatClass();
+			toggleFlightScheduleDetail();
+		}
 	};
 	handleDeviceCheck();
 	handleAlignModal();
 	toggleAriaChecked();
-	toggleSeatClass();
-	toggleFlightScheduleDetail();
 	handleFilterDelete();
 });
