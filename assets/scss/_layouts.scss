@@ -28,7 +28,6 @@
 		@include flex(flex, null, null, center, null, null, center);
 		flex: 1 1;
 		button {
-			text-align: center;
 			@include flex(flex, column, null, center, null, null, center);
 			row-gap: 6px;
 			flex: 1 1;
