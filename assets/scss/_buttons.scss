@@ -177,6 +177,20 @@
 	}
 }
 
+.btn-schedule-detail-close {
+	@include position(absolute, 6px, 6px, null, null, 1);
+	@include flex(inline-flex, null, null, center, null, null, center);
+	width: 16px;
+	height: 16px;
+	&:before {
+		content: "\eb55";
+		color: var(--c-gray-3);
+		font: {
+			size: var(--fs-large);
+		}
+	}
+}
+
 @keyframes refresh-animation {
 	from {
 		opacity: 0;

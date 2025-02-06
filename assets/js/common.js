@@ -1,6 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-	document.addEventListener("touchstart", function () { }, true);
 	const handleAlignModal = () => {
 		let touchStartY = 0;
 		let touchEndY = 0;
@@ -40,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 	}
-	// 클릭한 대상의 aria-checked 속성을 토글
+	// * 클릭한 대상의 aria-checked 속성을 토글
 	const toggleAriaChecked = () => {
 		document.querySelectorAll('.btn-inline-filter').forEach(button => {
 			button.addEventListener('click', () => {
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	};
-	// 좌석 클래스 안내
+	// * 좌석 클래스 안내
 	const toggleSeatClass = () => {
 		const seatClassButtons = document.querySelectorAll('.seat-class-default');
 		const handleClick = (event) => {
@@ -74,16 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.body.addEventListener('touchstart', handleBodyInteraction);
 		document.body.addEventListener('', handleBodyInteraction);
 	};
-	// 여정 안내
+	// * 여정 안내
 	const toggleFlightScheduleDetail = () => {
 		const scheduleDetailButtons = document.querySelectorAll('.btn-schedule-detail');
+		const scheduleDetailCloseButtons = document.querySelectorAll('.btn-schedule-detail-close');
 		const handleClick = (event) => {
 			scheduleDetailButtons.forEach(button => {
 				button.setAttribute('aria-expanded', 'false');
 			});
 			event.currentTarget.setAttribute('aria-expanded', 'true');
 		};
-		const handleBodyInteraction = () => {
+		const handleClose = () => {
 			scheduleDetailButtons.forEach(button => {
 				button.setAttribute('aria-expanded', 'false');
 			});
@@ -91,9 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		scheduleDetailButtons.forEach(button => {
 			button.addEventListener('click', handleClick);
 		});
-		document.body.addEventListener('touchstart', handleBodyInteraction);
+		scheduleDetailCloseButtons.forEach(button => {
+			button.addEventListener('click', handleClose);
+		});
 	};
-	// 선택한 필터 삭제
+	// * 선택한 필터 삭제
 	const handleFilterDelete = () => {
 		document.querySelectorAll('.btn-infilter-delete').forEach(button => {
 			button.addEventListener('click', () => {
@@ -111,20 +113,20 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	};
-	// 모바일 확인 
+	// * 모바일 확인 
 	const handleDeviceCheck = () => {
 		const btnModalMobileClose = document.querySelector('.btn-modal-mo-close');
 		const btnModalClose = document.querySelector('.btn-modal-close');
 		const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-		btnModalClose.style.display = isMobile ? 'none' : 'block';
+		btnModalClose.style.display = isMobile ? 'none' : 'inline-flex';
 		btnModalMobileClose.style.display = isMobile ? 'block' : 'none';
 		if (isMobile) {
 			toggleSeatClass();
-			toggleFlightScheduleDetail();
 		}
 	};
 	handleDeviceCheck();
 	handleAlignModal();
 	toggleAriaChecked();
 	handleFilterDelete();
+	toggleFlightScheduleDetail()
 });
