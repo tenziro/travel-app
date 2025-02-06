@@ -15,9 +15,9 @@
 
 .nav-bottom {
 	flex: none;
-	padding-bottom: env(safe-area-inset-bottom);
 	padding-left: env(safe-area-inset-left);
 	padding-right: env(safe-area-inset-right);
+	padding-bottom: env(safe-area-inset-bottom);
 	background: {
 		color: var(--primary-blue);
 	}
@@ -39,7 +39,7 @@
 			}
 			span {
 				font: {
-					size: var(--fs-small);
+					size: var(--fs-xsmall);
 					weight: var(--fw-medium)
 				}
 			}
@@ -47,7 +47,7 @@
 				color: var(--c-white);
 			}
 			&[aria-checked="false"] {
-				color: rgba(var(--c-white-rgb), 50%);
+				color: rgba(var(--c-white-rgb), 42%);
 			}
 		}
 	}
