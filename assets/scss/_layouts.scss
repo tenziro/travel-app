@@ -5,6 +5,7 @@
 	@include flex(flex, column);
 	height: 100dvh;
 }
+
 #header {
 	@include flex(flex, null, null, center, null, null, center);
 	height: 44px;
@@ -26,6 +27,9 @@
 	flex: 1 1;
 	overflow-y: auto;
 	padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+	background: {
+		color: var(--c-white);
+	}
 }
 .modal-open {
 	overflow: hidden;
@@ -67,6 +71,14 @@
 			&[aria-checked="false"] {
 				color: rgba(var(--c-white-rgb), 42%);
 			}
+		}
+	}
+}
+
+@media screen and (max-width: var(--body-max-width)) {
+	body {
+		background: {
+			color: var(--primary-blue);
 		}
 	}
 }
