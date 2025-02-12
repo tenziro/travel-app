@@ -158,6 +158,19 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	};
+	// * 필터 초기화
+	const handleFilterReset = () => {
+		const btnInlineReset = document.querySelector('.btn-inline-reset');
+		if (btnInlineReset) {
+			btnInlineReset.addEventListener('click', () => {
+				document.querySelectorAll('.selected-filter').forEach(filter => {
+					filter.remove();
+				});
+				updateSelectedFilterDisplay();
+				updateFilterCounts();
+			});
+		}
+	};
 	// * 모바일 확인 
 	const handleDeviceCheck = () => {
 		const btnModalMobileCloses = document.querySelectorAll('.btn-modal-mo-close');
@@ -177,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	updateSelectedFilterDisplay();
 	updateFilterCounts();
 	handleFilterDeleteCounts();
+	handleFilterReset();
 	const observer = new MutationObserver(() => {
 		updateSelectedFilterDisplay();
 		updateFilterCounts();
