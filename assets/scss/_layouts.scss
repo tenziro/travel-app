@@ -8,7 +8,7 @@
 
 #header {
 	@include flex(flex, null, null, center, null, null, center);
-	height: 44px;
+	padding: calc(16px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) 16px calc(20px + env(safe-area-inset-left));
 	flex: none;
 	background: {
 		color: var(--primary-blue);
