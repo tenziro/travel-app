@@ -11,7 +11,8 @@
 .modal {
 	&[data-type="bottom"] {
 		@include position(fixed, 0, null, 0, null, 100);
-		@include flex(flex, null, null, flex-end);
+		display: none;
+		align-items: flex-end;
 		width: 100%;
 		max-width: var(--body-max-width);
 		&:before {
@@ -56,25 +57,13 @@
 			background: {
 				color: var(--c-white);
 			}
-			transform: translateY(0);
+			transform: translateY(100%);
 		}
 		.modal-body {
 			padding: 20px 0;
 		}
 		.modal-footer {
 			padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
-		}
-		&:not(.active) {
-			display: none;
-			.modal-contents {
-				animation: modalCloseAnimation 780ms forwards;
-			}
-		}
-		&.active {
-			display: flex;
-			.modal-contents {
-				animation: modalOpenAnimation 780ms forwards;
-			}
 		}
 		.btn-modal-apply {
 			height: 42px;
@@ -115,22 +104,5 @@
 	}
 	+ .modal-filter-list {
 		@include border(top, 1px, dashed, var(--c-gray-6));
-	}
-}
-
-@keyframes modalOpenAnimation {
-	from {
-		transform: translateY(100%)
-	}
-	to {
-		transform: translateY(0);
-	}
-}
-@keyframes modalCloseAnimation {
-	from {
-		transform: translateY(0);
-	}
-	to {
-		transform: translateY(100%);
 	}
 }

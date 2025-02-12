@@ -1,52 +1,68 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+	// * 모달 컨트롤
 	const handleModal = (modalName) => {
-		let touchStartY = 0;
-		let touchEndY = 0;
 		const bodyWrap = document.querySelector('body');
-		const btnOpenModals = document.querySelectorAll(`button[data-modal-name="${modalName}"]`);
 		const modal = document.querySelector(`.modal[data-modal-name="${modalName}"]`);
-
+		const modalContents = modal.querySelector('.modal-contents');
+		let touchStartY = 0;
 		const handleTouchStart = (e) => {
 			touchStartY = e.changedTouches[0].screenY;
 		};
-
-		const handleTouchEnd = (e) => {
-			touchEndY = e.changedTouches[0].screenY;
-			bodyWrap.classList.remove('modal-open');
-			if (touchEndY > touchStartY + 1) {
+		const animateModal = (show) => {
+			const displayValue = show ? "flex" : "none";
+			const yValue = show ? 0 : '100%';
+			const duration = show ? 0.625 : 0.425;
+			gsap.fromTo(modal,
+				{ display: displayValue === "flex" ? "none" : "flex" },
+				{ display: displayValue, duration: 0 }
+			);
+			gsap.fromTo(modalContents,
+				{ y: show ? '100%' : 0 },
+				{ y: yValue, duration, ease: "circ.out" }
+			);
+			if (show) {
+				modal.classList.add('active');
+			} else {
 				modal.classList.remove('active');
 			}
 		};
-
-		const handleCloseClick = () => {
-			bodyWrap.classList.remove('modal-open');
-			modal.classList.remove('active');
+		const handleTouchEnd = (e) => {
+			const touchEndY = e.changedTouches[0].screenY;
+			if (modal.classList.contains('active') && touchEndY > touchStartY + 1) {
+				bodyWrap.classList.remove('modal-open');
+				animateModal(false);
+			}
 		};
-
-		if (btnOpenModals) {
-			btnOpenModals.forEach(btnOpenModal => {
-				btnOpenModal.addEventListener('click', (event) => {
-					bodyWrap.classList.add('modal-open');
-					modal.classList.add('active');
-					if (modalName === 'filter') {
-						const filterText = event.currentTarget.querySelector('span').textContent;
-						const modalTitle = modal.querySelector('.modal-header .title');
-						modalTitle.textContent = filterText;
-					}
-				});
+		const handleCloseClick = () => {
+			if (modal.classList.contains('active')) {
+				bodyWrap.classList.remove('modal-open');
+				animateModal(false);
+			}
+		};
+		const openModalButtons = document.querySelectorAll(`button[data-modal-name="${modalName}"]`);
+		openModalButtons.forEach(button => {
+			button.addEventListener('click', (event) => {
+				bodyWrap.classList.add('modal-open');
+				animateModal(true);
+				if (modalName === 'filter') {
+					const filterText = event.currentTarget.querySelector('span').textContent;
+					const modalTitle = modal.querySelector('.modal-header .title');
+					modalTitle.textContent = filterText;
+				}
 			});
-		}
-
-		document.querySelectorAll('.btn-modal-mo-close').forEach(button => {
+		});
+		const closeModalButtons = document.querySelectorAll('.btn-modal-mo-close');
+		closeModalButtons.forEach(button => {
 			button.addEventListener('touchstart', handleTouchStart);
 			button.addEventListener('touchend', handleTouchEnd);
 		});
-
-		document.querySelectorAll('.btn-modal-mo-close, .btn-modal-close').forEach(button => {
+		const allCloseButtons = document.querySelectorAll('.btn-modal-mo-close, .btn-modal-close');
+		allCloseButtons.forEach(button => {
 			button.addEventListener('click', handleCloseClick);
 		});
 	};
+
 	// * 좌석 클래스 안내
 	const toggleSeatClass = () => {
 		const seatClassButtons = document.querySelectorAll('.seat-class-default');
