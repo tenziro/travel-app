@@ -5,6 +5,23 @@
 	@include flex(flex, column);
 	height: 100dvh;
 }
+#header {
+	@include flex(flex, null, null, center, null, null, center);
+	height: 44px;
+	flex: none;
+	background: {
+		color: var(--primary-blue);
+	}
+	.title {
+		color: var(--c-white);
+		strong {
+			margin-left: 5px;
+		}
+		font: {
+			size: var(--fs-extra);
+		}
+	}
+}
 #contents {
 	flex: 1 1;
 	overflow-y: auto;
@@ -13,7 +30,7 @@
 	overflow: hidden;
 }
 
-.nav-bottom {
+#nav-bottom {
 	flex: none;
 	padding-left: env(safe-area-inset-left);
 	padding-right: env(safe-area-inset-right);
