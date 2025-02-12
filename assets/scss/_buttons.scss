@@ -64,12 +64,14 @@
 	@include flex(inline-flex, null, null, center);
 	height: var(--btn-height);
 	padding: 14px;
-	> span {
+	column-gap: 4px;
+	font: {
+		size: var(--fs-base);
+		weight: var(--fw-semi);
+	}
+	> span,
+	> strong {
 		flex: none;
-		font: {
-			size: var(--fs-base);
-			weight: var(--fw-semi);
-		}
 	}
 	&[aria-checked="true"] {
 		border: {
@@ -78,9 +80,7 @@
 		background: {
 			color: var(--tertiary-blue);
 		}
-		span {
-			color: var(--c-white);
-		}
+		color: var(--c-white);
 	}
 	&[aria-checked="false"] {
 		border: {
@@ -89,9 +89,7 @@
 		background: {
 			color: var(--c-white);
 		}
-		span {
-			color: var(--c-gray-2);
-		}
+		color: var(--c-gray-2);
 	}
 }
 .list-selected-filter {

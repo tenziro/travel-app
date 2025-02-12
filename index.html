@@ -24,51 +24,51 @@
 				</div>
 				<!-- * 리스트 상단 -->
 				<div class="list-result-top">
-					<button type="button" class="btn-list-filter" role="button" aria-haspopup="true">추천순</button>
+					<button type="button" class="btn-list-filter" role="button" aria-haspopup="true" data-modal-name="align">추천순</button>
 				</div>
 				<!-- * 필터 -->
 				<div class="list-inline-filter-wrap">
 					<div class="list-inline-filter">
 						<div class="inline-list">
 							<button aria-label="필터초기화" class="btn-inline-reset"></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>직항/경유</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>요금조건</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>항공사</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>시간</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>가격</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>공항</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>경유지</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox"><span>기타</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="direct" data-modal-name="filter"><span>직항/경유</span><strong>1</strong></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="airline" data-modal-name="filter"><span>항공사</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="price-option" data-modal-name="filter"><span>요금조건</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="time" data-modal-name="filter"><span>시간</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="price" data-modal-name="filter"><span>가격</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="airport" data-modal-name="filter"><span>공항</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="layout" data-modal-name="filter"><span>경유지</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="etc" data-modal-name="filter"><span>기타</span></button>
 						</div>
 					</div>
 					<div class="list-selected-filter">
 						<div class="inline-list">
-							<span class="selected-filter">
+							<span class="selected-filter" data-filter-child="direct">
 								<span class="selected-filter-text">직항</span>
 								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
 								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
 							</span>
-							<span class="selected-filter">
+							<span class="selected-filter" data-filter-child="airline">
 								<span class="selected-filter-text">대한항공</span>
 								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
 								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
 							</span>
-							<span class="selected-filter">
+							<span class="selected-filter" data-filter-child="airline">
 								<span class="selected-filter-text">아시아나항공</span>
 								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
 								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
 							</span>
-							<span class="selected-filter">
+							<span class="selected-filter" data-filter-child="price-option">
 								<span class="selected-filter-text">환불가능</span>
 								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
 								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
 							</span>
-							<span class="selected-filter">
+							<span class="selected-filter" data-filter-child="price-option">
 								<span class="selected-filter-text">마일리지적립</span>
 								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
 								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
 							</span>
-							<span class="selected-filter">
+							<span class="selected-filter" data-filter-child="time">
 								<span class="selected-filter-text">07:00~12:00</span>
 								<button type="button" class="btn-infilter-view" aria-label="필터 열기"></button>
 								<button type="button" class="btn-infilter-delete" aria-label="조건 삭제"></button>
@@ -273,11 +273,27 @@
 				<button type="button" class="btn-list-refresh"><span>새로고침</span></button>
 			</div>
 			<!-- * 정렬 모달 -->
-			<div class="modal" data-type="bottom">
+			<div class="modal" data-type="bottom" data-modal-name="align">
 				<div class="modal-contents">
 					<button type="button" role="button" aria-label="필터 닫기" class="btn-modal-mo-close"></button>
 					<div class="modal-header">
 						<h1 class="title">검색결과 정렬</h1>
+						<button type="button" role="button" aria-label="필터 닫기" class="btn-modal-close"></button>
+					</div>
+					<div class="modal-body">
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" role="button" class="btn-modal-apply">적용하기</button>
+					</div>
+				</div>
+			</div>
+			<!-- * 필터 모달 -->
+			<div class="modal" data-type="bottom" data-modal-name="filter">
+				<div class="modal-contents">
+					<button type="button" role="button" aria-label="필터 닫기" class="btn-modal-mo-close"></button>
+					<div class="modal-header">
+						<h1 class="title"></h1>
 						<button type="button" role="button" aria-label="필터 닫기" class="btn-modal-close"></button>
 					</div>
 					<div class="modal-body">

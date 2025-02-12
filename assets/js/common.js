@@ -1,11 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-	const handleAlignModal = () => {
+	const handleModal = (modalName) => {
 		let touchStartY = 0;
 		let touchEndY = 0;
 		const bodyWrap = document.querySelector('body');
-		const btnFilter = document.querySelector('.btn-list-filter');
-		const alignModal = document.querySelector('.modal[data-type="bottom"]');
+		const btnOpenModals = document.querySelectorAll(`button[data-modal-name="${modalName}"]`);
+		const modal = document.querySelector(`.modal[data-modal-name="${modalName}"]`);
 
 		const handleTouchStart = (e) => {
 			touchStartY = e.changedTouches[0].screenY;
@@ -15,19 +15,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			touchEndY = e.changedTouches[0].screenY;
 			bodyWrap.classList.remove('modal-open');
 			if (touchEndY > touchStartY + 1) {
-				alignModal.classList.remove('active');
+				modal.classList.remove('active');
 			}
 		};
 
 		const handleCloseClick = () => {
 			bodyWrap.classList.remove('modal-open');
-			alignModal.classList.remove('active');
+			modal.classList.remove('active');
 		};
 
-		btnFilter.addEventListener('click', () => {
-			bodyWrap.classList.add('modal-open');
-			alignModal.classList.add('active');
-		});
+		if (btnOpenModals) {
+			btnOpenModals.forEach(btnOpenModal => {
+				btnOpenModal.addEventListener('click', (event) => {
+					bodyWrap.classList.add('modal-open');
+					modal.classList.add('active');
+					if (modalName === 'filter') {
+						const filterText = event.currentTarget.querySelector('span').textContent;
+						const modalTitle = modal.querySelector('.modal-header .title');
+						modalTitle.textContent = filterText;
+					}
+				});
+			});
+		}
 
 		document.querySelectorAll('.btn-modal-mo-close').forEach(button => {
 			button.addEventListener('touchstart', handleTouchStart);
@@ -36,21 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		document.querySelectorAll('.btn-modal-mo-close, .btn-modal-close').forEach(button => {
 			button.addEventListener('click', handleCloseClick);
-		});
-
-	}
-	// * 클릭한 대상의 aria-checked 속성을 토글
-	const toggleAriaChecked = () => {
-		document.querySelectorAll('.btn-inline-filter').forEach(button => {
-			button.addEventListener('click', () => {
-				const isChecked = button.getAttribute('aria-checked') === 'true';
-				button.setAttribute('aria-checked', !isChecked);
-				const listSelectedFilter = document.querySelector('.list-selected-filter');
-				const hasCheckedFilter = Array.from(document.querySelectorAll('.btn-inline-filter')).some(filterButton => filterButton.getAttribute('aria-checked') === 'true');
-				if (listSelectedFilter) {
-					listSelectedFilter.style.display = hasCheckedFilter ? 'block' : 'none';
-				}
-			});
 		});
 	};
 	// * 좌석 클래스 안내
@@ -113,20 +107,84 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	};
+	// * 필터 업데이트
+	const updateSelectedFilterDisplay = () => {
+		const listSelectedFilter = document.querySelector('.list-selected-filter');
+		const selectedFilters = document.querySelectorAll('.selected-filter');
+		if (listSelectedFilter) {
+			listSelectedFilter.style.display = selectedFilters.length > 0 ? 'block' : 'none';
+		}
+	};
+	const updateFilterCounts = () => {
+		const selectedFilters = document.querySelectorAll('.selected-filter');
+		const filterCounts = {};
+
+		selectedFilters.forEach(filter => {
+			const filterType = filter.getAttribute('data-filter-child');
+			if (filterCounts[filterType]) {
+				filterCounts[filterType]++;
+			} else {
+				filterCounts[filterType] = 1;
+			}
+		});
+		document.querySelectorAll('.btn-inline-filter').forEach(button => {
+			const filterType = button.getAttribute('data-filter-parent');
+			const count = filterCounts[filterType] || 0;
+			let countElement = button.querySelector('strong');
+			if (count > 0) {
+				if (!countElement) {
+					countElement = document.createElement('strong');
+					button.appendChild(countElement);
+				}
+				countElement.textContent = count;
+				button.setAttribute('aria-checked', 'true');
+			} else {
+				if (countElement) {
+					countElement.remove();
+				}
+				button.setAttribute('aria-checked', 'false');
+			}
+		});
+	};
+	const handleFilterDeleteCounts = () => {
+		document.querySelectorAll('.btn-infilter-delete').forEach(button => {
+			button.addEventListener('click', () => {
+				const parent = button.closest('.selected-filter');
+				if (parent) {
+					parent.remove();
+					updateSelectedFilterDisplay();
+					updateFilterCounts();
+				}
+			});
+		});
+	};
 	// * 모바일 확인 
 	const handleDeviceCheck = () => {
-		const btnModalMobileClose = document.querySelector('.btn-modal-mo-close');
-		const btnModalClose = document.querySelector('.btn-modal-close');
+		const btnModalMobileCloses = document.querySelectorAll('.btn-modal-mo-close');
+		const btnModalCloses = document.querySelectorAll('.btn-modal-close');
 		const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-		btnModalClose.style.display = isMobile ? 'none' : 'inline-flex';
-		btnModalMobileClose.style.display = isMobile ? 'block' : 'none';
+		btnModalCloses.forEach(btnModalClose => {
+			btnModalClose.style.display = isMobile ? 'none' : 'inline-flex';
+		});
+		btnModalMobileCloses.forEach(btnModalMobileClose => {
+			btnModalMobileClose.style.display = isMobile ? 'block' : 'none';
+		});
 		if (isMobile) {
 			toggleSeatClass();
 		}
 	};
+
+	updateSelectedFilterDisplay();
+	updateFilterCounts();
+	handleFilterDeleteCounts();
+	const observer = new MutationObserver(() => {
+		updateSelectedFilterDisplay();
+		updateFilterCounts();
+	});
+	observer.observe(document.querySelector('.list-selected-filter'), { childList: true });
 	handleDeviceCheck();
-	handleAlignModal();
-	toggleAriaChecked();
 	handleFilterDelete();
-	toggleFlightScheduleDetail()
+	toggleFlightScheduleDetail();
+	handleModal('align');
+	handleModal('filter');
 });
