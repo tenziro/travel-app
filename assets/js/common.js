@@ -10,21 +10,27 @@ document.addEventListener('DOMContentLoaded', () => {
 			touchStartY = e.changedTouches[0].screenY;
 		};
 		const animateModal = (show) => {
-			const displayValue = show ? "flex" : "none";
-			const yValue = show ? 0 : '100%';
-			const duration = show ? 0.625 : 0.425;
-			gsap.fromTo(modal,
-				{ display: displayValue === "flex" ? "none" : "flex" },
-				{ display: displayValue, duration: 0 }
-			);
-			gsap.fromTo(modalContents,
-				{ y: show ? '100%' : 0 },
-				{ y: yValue, duration, ease: "circ.out" }
-			);
+			const duration = show ? 0.582 : 0.425;
 			if (show) {
 				modal.classList.add('active');
+				gsap.fromTo(modal,
+					{ display: "none" },
+					{ display: "flex" }
+				);
+				gsap.fromTo(modalContents,
+					{ y: '100%' },
+					{ y: 0, duration, ease: "circ.out" }
+				);
 			} else {
 				modal.classList.remove('active');
+				gsap.fromTo(modalContents,
+					{ y: 0 },
+					{ y: '100%', duration, ease: "circ.out" }
+				);
+				gsap.fromTo(modal,
+					{ display: "flex" },
+					{ display: "none" }
+				);
 			}
 		};
 		const handleTouchEnd = (e) => {
