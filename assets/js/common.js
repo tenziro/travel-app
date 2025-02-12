@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			touchStartY = e.changedTouches[0].screenY;
 		};
 		const animateModal = (show) => {
-			const duration = show ? 0.582 : 0.425;
+			const duration = show ? 0.645 : 0.625;
 			if (show) {
 				modal.classList.add('active');
 				gsap.fromTo(modal,
@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
 				);
 				gsap.fromTo(modalContents,
 					{ y: '100%' },
-					{ y: 0, duration, ease: "circ.out" }
+					{ y: 0, duration, ease: "power4.out" }
 				);
 			} else {
 				modal.classList.remove('active');
 				gsap.fromTo(modalContents,
 					{ y: 0 },
-					{ y: '100%', duration, ease: "circ.out" }
+					{ y: '100%', duration, ease: "power4.out" }
 				);
 				gsap.fromTo(modal,
 					{ display: "flex" },
