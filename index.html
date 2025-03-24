@@ -17,7 +17,7 @@
 	<body>
 		<div id="wrap">
 			<header id="header">
-				<h1 class="title"><i class="ti ti-location-filled"></i><strong>Hello</strong></h1>
+				<h1 class="title"><strong>BZP Travel</strong></h1>
 			</header>
 			<section id="contents">
 				<!-- * 출장 규정 -->
@@ -43,8 +43,8 @@
 							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="time" data-modal-name="filter"><span>시간</span></button>
 							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="price" data-modal-name="filter"><span>가격</span></button>
 							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="airport" data-modal-name="filter"><span>공항</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="layout" data-modal-name="filter"><span>경유지</span></button>
-							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="etc" data-modal-name="filter"><span>기타</span></button>
+							<!-- <button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="layout" data-modal-name="filter"><span>경유지</span></button>
+							<button aria-checked="false" class="btn-inline-filter" role="checkbox" data-filter-parent="etc" data-modal-name="filter"><span>기타</span></button> -->
 						</div>
 					</div>
 					<div class="list-selected-filter">
@@ -290,7 +290,8 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" role="button" class="btn-modal-apply">적용하기</button>
+						<button type="button" role="button" class="btn-modal reset">초기화</button>
+						<button type="button" role="button" class="btn-modal apply">적용하기</button>
 					</div>
 				</div>
 			</div>
@@ -299,14 +300,22 @@
 				<div class="modal-contents">
 					<button type="button" role="button" aria-label="필터 닫기" class="btn-modal-mo-close"></button>
 					<div class="modal-header">
-						<h1 class="title"></h1>
+						<h1 class="title">필터</h1>
 						<button type="button" role="button" aria-label="필터 닫기" class="btn-modal-close"></button>
 					</div>
 					<div class="modal-body">
-
+						<div class="tab-header">
+							<button class="tab-item" aria-role="checkbox" aria-checked="true" data-tab="direct">직항/경유</button>
+							<button class="tab-item" aria-role="checkbox" aria-checked="false" data-tab="airline">항공사</button>
+							<button class="tab-item" aria-role="checkbox" aria-checked="false" data-tab="price-option">요금조건</button>
+							<button class="tab-item" aria-role="checkbox" aria-checked="false" data-tab="time">시간</button>
+							<button class="tab-item" aria-role="checkbox" aria-checked="false" data-tab="price">가격</button>
+							<button class="tab-item" aria-role="checkbox" aria-checked="false" data-tab="airport">공항</button>
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" role="button" class="btn-modal-apply">적용하기</button>
+						<button type="button" role="button" class="btn-modal reset">초기화</button>
+						<button type="button" role="button" class="btn-modal apply">적용하기</button>
 					</div>
 				</div>
 			</div>

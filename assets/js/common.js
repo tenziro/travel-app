@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 	// * 모달 컨트롤
 	const handleModal = (modalName) => {
@@ -48,13 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 		const openModalButtons = document.querySelectorAll(`button[data-modal-name="${modalName}"]`);
 		openModalButtons.forEach(button => {
-			button.addEventListener('click', (event) => {
+			button.addEventListener('click', () => {
 				bodyWrap.classList.add('modal-open');
 				animateModal(true);
 				if (modalName === 'filter') {
-					const filterText = event.currentTarget.querySelector('span').textContent;
-					const modalTitle = modal.querySelector('.modal-header .title');
-					modalTitle.textContent = filterText;
+					// * 관련 탭 항목 선택
+					const filterParent = button.getAttribute('data-filter-parent');
+					const tabItems = document.querySelectorAll('.tab-header .tab-item');
+					tabItems.forEach(tab => {
+						if (tab.getAttribute('data-tab') === filterParent) {
+							tab.setAttribute('aria-checked', 'true');
+						} else {
+							tab.setAttribute('aria-checked', 'false');
+						}
+					});
 				}
 			});
 		});
@@ -63,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			button.addEventListener('touchstart', handleTouchStart);
 			button.addEventListener('touchend', handleTouchEnd);
 		});
-		const allCloseButtons = document.querySelectorAll('.btn-modal-mo-close, .btn-modal-close');
+		const allCloseButtons = document.querySelectorAll('.btn-modal-mo-close, .btn-modal-close, .btn-modal.apply');
 		allCloseButtons.forEach(button => {
 			button.addEventListener('click', handleCloseClick);
 		});
@@ -209,6 +215,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	};
 
+	// * 탭 항목 선택
+	const handleTabSelection = () => {
+		const tabHeaders = document.querySelectorAll('.tab-header .tab-item');
+		tabHeaders.forEach(tab => {
+			tab.addEventListener('click', () => {
+				tabHeaders.forEach(item => item.setAttribute('aria-checked', 'false'));
+				tab.setAttribute('aria-checked', 'true');
+			});
+		});
+	};
+
 	updateSelectedFilterDisplay();
 	updateFilterCounts();
 	handleFilterDeleteCounts();
@@ -223,4 +240,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	toggleFlightScheduleDetail();
 	handleModal('align');
 	handleModal('filter');
+	handleTabSelection();
 });

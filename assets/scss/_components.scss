@@ -1,1 +1,29 @@
+@charset "UTF-8";
 
+.tab-header {
+	padding: 0 20px;
+
+	@include border(bottom, 1px, solid, var(--border-default));
+	@include flex(flex, null, nowrap, null);
+	overflow-x: auto;
+	.tab-item {
+		padding: 16px 10px;
+		font: {
+			size: var(--fs-medium);
+			weight: var(--fw-medium)
+		}
+		@include position(relative);
+		&[aria-checked="false"] {
+			color: var(--c-gray-5);
+		}
+		&[aria-checked="true"] {
+			color: var(--primary-blue);
+			&:after {
+				content: "";
+				@include position(absolute, null, 0, 0, 0);
+				height: 2px;
+				background: var(--primary-blue);
+			}
+		}
+	}
+}
