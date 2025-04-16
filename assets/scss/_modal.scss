@@ -59,13 +59,10 @@
 			background: {
 				color: var(--c-white);
 			}
-		}
-		.modal-body {
-			// padding: 20px 0;
-		}
+																																}
 		.modal-footer {
-			padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
 			@include flex(flex, null, null, center);
+			padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
 			gap: 10px;
 		}
 		.btn-modal {

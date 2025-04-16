@@ -428,11 +428,11 @@ $imp: unquote("!important");
 		transform: translateY($translateY);
 	}
 	position: $pos;
+	z-index: $z-index;
 	top: $top;
 	right: $right;
 	bottom: $bottom;
 	left: $left;
-	z-index: $z-index;
 }
 // * margin, padding 설정
 @for $i from 0 through 100 {
@@ -488,19 +488,17 @@ $imp: unquote("!important");
 	}
 }
 @mixin v-dotline {
-	content: "";
 	position: absolute;
 	top: 0;
-	left: -1px;
 	bottom: 0;
+	left: -1px;
+	content: "";
 	width: 2px;
 	background: url($icons-image-url+"ico-dashline-v.png") 0 2px repeat-y;
 	background-size: 2px auto;
 }
 // * border box 공통 속성 @mixin
 @mixin border-radius-box($bg: true, $border: true) {
-	position: relative;
-	border-radius: var(--default-radius);
 	@if ($bg and $border) {
 		border: 1px solid var(--border-default);
 		background: var(--c-white);
@@ -511,14 +509,16 @@ $imp: unquote("!important");
 	@else if ($border) {
 		border: 1px solid var(--border-default);
 	}
+	position: relative;
+	border-radius: var(--default-radius);
 }
 // * 어려줄 말줄임 @mixin
 @mixin line-clamp($line-num) {
+	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: normal;
 	word-wrap: break-word;
-	display: -webkit-box;
 	-webkit-line-clamp: $line-num;
 	-webkit-box-orient: vertical;
 }
@@ -528,23 +528,17 @@ $imp: unquote("!important");
 }
 // * 이미지 가운데 정렬 @mixin
 @mixin image-center {
+	margin: auto;
 	position: absolute;
 	top: 0;
-	left: 0;
 	right: 0;
 	bottom: 0;
+	left: 0;
 	width: auto;
 	height: auto;
-	margin: auto;
 }
 // * 아이템 이미지 없을 경우 대체 이미지 설정 @mixin
 @mixin no-image($large: true) {
-	background: {
-		image: url($common-image-url+"ico-nodata-image.png") $imp;
-		position: 50% 50% $imp;
-		repeat: no-repeat $imp;
-		color: var(--color-sub1) $imp;
-	}
 	@if ($large) {
 		background: {
 			size: auto 50px $imp;
@@ -555,17 +549,23 @@ $imp: unquote("!important");
 			size: auto 30px $imp;
 		}
 	}
+	background: {
+		position: 50% 50% $imp;
+		color: var(--color-sub1) $imp;
+		repeat: no-repeat $imp;
+		image: url($common-image-url+"ico-nodata-image.png") $imp;
+	}
 }
 // * 백그라운드 멀티플 @mixin
 @mixin bg-data-multiple($large: true) {
-	background-position: 50% 50% $imp;
-	background-repeat: no-repeat $imp;
 	@if ($large) {
 		background-size: cover, auto 50px $imp;
 	}
 	@else {
 		background-size: cover, auto 30px $imp;
 	}
+	background-position: 50% 50% $imp;
+	background-repeat: no-repeat $imp;
 }
 
 @mixin mobile-scrollbars {

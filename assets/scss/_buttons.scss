@@ -7,14 +7,14 @@
 	.inline-list {
 		@include flex(flex, null, nowrap, center);
 		@include mobile-scrollbars;
-		overflow: auto hidden;
 		padding: 12px 20px;
+		overflow: auto hidden;
 		column-gap: 4px;
 	}
 	&:before,
 	&:after {
-		content: "";
 		position: absolute;
+		content: "";
 		width: 29px;
 	}
 	&:before {
@@ -62,8 +62,8 @@
 .btn-inline-filter {
 	@include border(all, 1px, solid, null, calc(var(--btn-height) / 2));
 	@include flex(inline-flex, null, null, center);
-	height: var(--btn-height);
 	padding: 14px;
+	height: var(--btn-height);
 	column-gap: 4px;
 	font: {
 		size: var(--fs-base);
@@ -74,22 +74,22 @@
 		flex: none;
 	}
 	&[aria-checked="true"] {
+		color: var(--c-white);
 		border: {
 			color: transparent;
 		}
 		background: {
 			color: var(--tertiary-blue);
 		}
-		color: var(--c-white);
 	}
 	&[aria-checked="false"] {
+		color: var(--c-gray-2);
 		border: {
 			color: var(--border-default);
 		}
 		background: {
 			color: var(--c-white);
 		}
-		color: var(--c-gray-2);
 	}
 }
 .list-selected-filter {
@@ -138,11 +138,11 @@
 .btn-list-refresh {
 	@include flex(inline-flex, null, null, center, null, null, center);
 	@include position(sticky, null, null, 16px, null, 1);
-	overflow: hidden;
+	padding: 0 16px;
 	left: 50%;
+	overflow: hidden;
 	width: 0;
 	height: 36px;
-	padding: 0 16px;
 	color: var(--c-white);
 	transform: translateX(-50%);
 	animation: refresh-animation 1000ms forwards;
@@ -163,8 +163,8 @@
 		}
 		&:before {
 			flex: none;
-			margin-right: 4px;
 			content: "\eb13";
+			margin-right: 4px;
 			font: {
 				size: var(--fs-large);
 			}
@@ -191,12 +191,12 @@
 
 @keyframes refresh-animation {
 	from {
-		opacity: 0;
 		width: 0;
+		opacity: 0;
 	}
 	to {
-		opacity: 100%;
 		width: 96px;
+		opacity: 100%;
 	}
 }
 @keyframes refresh-text-animation {
